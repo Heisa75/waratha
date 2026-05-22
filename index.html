@@ -1,151 +1,522 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#1B4332" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="ورثة" />
-  <title>ورثة · Waratha v3</title>
+  
+  <title>ورثة · Waratha v3 Upgraded</title>
+  
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
   <link rel="icon" href="icons/icon-192.png" />
-  <style>
-:root{
-  --g:#1B4332;--g2:#2D6A4F;--g3:#52B788;--gold:#C9A84C;--gold2:#E8D48B;
-  --cr:#FDF8ED;--cr2:#F2E8D5;--ink:#1C1208;--muted:#66543a;--white:#fff;
-  --bdr:rgba(27,67,50,.14);--shadow:0 12px 35px rgba(27,67,50,.12);--r:20px;--rs:12px;
-}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}body{font-family:"Noto Naskh Arabic", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;background:var(--cr);color:var(--ink);max-width:520px;margin:0 auto;min-height:100vh;direction:rtl;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(circle at 20% 10%,rgba(201,168,76,.14),transparent 28%),radial-gradient(circle at 80% 20%,rgba(82,183,136,.12),transparent 25%),linear-gradient(135deg,rgba(27,67,50,.04),transparent 40%);z-index:0}
-main{position:relative;z-index:1}.screen{display:none;min-height:100vh;padding-bottom:88px;animation:rise .25s ease both}.screen.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-button{font:inherit;border:0;cursor:pointer}button:active{transform:scale(.985)}
-.hero{position:relative;text-align:center;padding:34px 18px 28px;background:linear-gradient(155deg,var(--g),var(--g2));color:var(--cr);overflow:hidden}.hero:after{content:"";position:absolute;inset:auto -15% -40% -15%;height:180px;background:radial-gradient(ellipse,rgba(201,168,76,.25),transparent 70%)}.brand-mark{width:74px;height:74px;margin:0 auto 10px;border:1px solid rgba(232,212,139,.55);border-radius:24px;display:grid;place-items:center;color:var(--gold2);font-size:2.9rem;font-weight:800;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}.eyebrow{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(253,248,237,.7);direction:ltr}.hero h1{font-size:3.2rem;line-height:1;color:var(--gold2)}.subtitle{margin-top:8px;font-size:.95rem}.subtitle-en{direction:ltr;color:rgba(253,248,237,.72);font-size:.78rem}.hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:15px;position:relative;z-index:2}.hero-pills span{font-size:.7rem;background:rgba(255,255,255,.1);border:1px solid rgba(232,212,139,.35);padding:5px 10px;border-radius:99px;color:var(--gold2)}
-.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 14px 2px}.stats-strip div,.result-grid div{background:var(--white);border:1px solid var(--bdr);border-radius:var(--rs);text-align:center;padding:11px 6px;box-shadow:0 5px 18px rgba(27,67,50,.06)}.stats-strip strong,.result-grid strong{display:block;color:var(--g);font-size:1.35rem}.stats-strip span,.result-grid span{font-size:.72rem;color:var(--muted);display:block}.stats-strip small{font-size:.62rem;color:var(--muted);direction:ltr;display:block}
-.panel{padding:16px}.section-title{display:flex;justify-content:space-between;align-items:end;margin:4px 0 10px}.section-title span{font-weight:800;color:var(--g)}.section-title small{direction:ltr;color:var(--muted);font-size:.7rem}.mode-grid,.level-grid,.category-grid{display:grid;gap:10px}.mode-grid{grid-template-columns:1fr}.card{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:15px;text-align:right;box-shadow:var(--shadow);position:relative;overflow:hidden}.mode-card{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center}.mode-card .icon{font-size:1.75rem}.mode-card strong{color:var(--g);font-size:1rem}.mode-card em{grid-column:2;direction:ltr;color:var(--muted);font-style:normal;font-size:.7rem;text-align:right}.mode-card b{grid-column:2;justify-self:start;margin-top:4px;background:#DCFCE7;color:#166534;border-radius:99px;padding:2px 9px;font-size:.66rem}.note-box{margin:0 16px 18px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);border-radius:var(--r);padding:13px 15px;color:var(--muted);line-height:1.7;font-size:.82rem}.note-box strong{color:var(--g);display:block}.note-box.compact{margin-top:8px}
-.topbar{position:sticky;top:0;z-index:5;background:rgba(253,248,237,.94);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bdr);padding:12px 14px}.topbar div{text-align:left}.topbar strong{color:var(--g);display:block}.topbar small{font-size:.65rem;color:var(--muted);direction:ltr}.back,.ghost{background:var(--cr2);color:var(--g);border-radius:12px;padding:8px 11px}.level-grid,.category-grid{padding:16px;grid-template-columns:1fr 1fr}.level-card,.cat-card{min-height:120px}.level-card strong,.cat-card strong{color:var(--g);font-size:1.05rem;display:block}.level-card span,.cat-card span{font-size:1.6rem;display:block;margin-bottom:6px}.level-card em,.cat-card em{color:var(--muted);font-size:.68rem;direction:ltr;font-style:normal;display:block}.level-card small,.cat-card small{margin-top:8px;color:var(--gold);font-size:.68rem;display:block}.cat-card.random{grid-column:1/-1;border:2px dashed rgba(201,168,76,.5);background:var(--cr2)}
-.quiz-head{background:linear-gradient(135deg,var(--g),var(--g2));color:var(--cr);display:flex;align-items:center;justify-content:space-between;padding:12px 14px}.quiz-head strong{display:block}.quiz-head small{direction:ltr;color:rgba(253,248,237,.65);font-size:.65rem}.score{text-align:center;color:var(--gold2)}.score span{font-weight:800}.progress,.timer{height:4px;background:rgba(27,67,50,.12)}.progress span,.timer span{display:block;height:100%;width:0%;background:var(--gold);transition:width .25s ease}.timer span{background:var(--g3);transition:width 1s linear}.dots{display:flex;gap:4px;padding:8px 14px 0}.dots i{height:5px;flex:1;border-radius:5px;background:rgba(27,67,50,.13)}.dots i.done{background:rgba(201,168,76,.7)}.dots i.now{background:var(--g)}.quiz-card{padding:16px}.badges{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.badges span{border:1px solid var(--bdr);background:var(--white);color:var(--muted);border-radius:99px;padding:4px 9px;font-size:.68rem}.qnum{color:var(--muted);direction:ltr;text-align:right;font-size:.7rem;margin-bottom:8px}.riddle{background:#F3E8FF;border:1px solid #D8B4FE;color:#6D28D9;border-radius:var(--rs);padding:11px 12px;margin-bottom:12px;line-height:1.7;font-size:.85rem}.quiz-card h2{font-size:1.24rem;line-height:1.75;color:var(--g);margin-bottom:6px}.quiz-card>p[dir="ltr"]{font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:16px;text-align:right}.options{display:grid;gap:9px}.option{background:var(--white);border:1.5px solid var(--bdr);border-radius:var(--rs);padding:13px;text-align:right}.option:hover:not(:disabled){border-color:var(--g2);background:var(--cr2)}.option.correct{background:#DCFCE7!important;border-color:#22C55E!important}.option.wrong{background:#FEE2E2!important;border-color:#EF4444!important}.option:disabled{cursor:default}.option strong{display:block;color:var(--g);font-size:.96rem}.option small{display:block;color:var(--muted);direction:ltr;font-size:.7rem;margin-top:3px}.explain{margin-top:13px;background:rgba(27,67,50,.055);border-right:4px solid var(--g);border-radius:var(--rs);padding:13px 14px;line-height:1.7}.explain strong{color:var(--g);font-size:.88rem}.explain p{color:var(--muted);font-size:.74rem}.explain small{display:block;color:var(--muted);opacity:.75;margin-top:6px}.reveal{border-bottom:1px solid var(--bdr);padding-bottom:8px;margin-bottom:8px;color:var(--g)!important;direction:rtl!important}.primary,.secondary{width:100%;border-radius:var(--r);padding:14px 16px;margin-top:13px;font-weight:800}.primary{background:var(--g);color:var(--white)}.secondary{background:var(--white);border:1px solid var(--bdr);color:var(--g)}
-.result-hero{text-align:center;background:linear-gradient(160deg,var(--g),var(--g2));color:var(--cr);padding:38px 18px 30px}.result-hero span{font-size:3.2rem}.result-hero h1{font-size:1.2rem;margin-top:8px}.result-hero strong{display:block;color:var(--gold2);font-size:3rem;line-height:1.1}.result-hero p{color:rgba(253,248,237,.75)}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:16px}.result-actions{padding:0 16px 16px}
-body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.kids .option strong{font-size:1.08rem}
-@media (min-width:430px){.mode-grid{grid-template-columns:1fr 1fr}.mode-card{min-height:122px;align-content:center}.mode-card em{grid-column:1/-1}.mode-card b{grid-column:1/-1}.level-grid,.category-grid{gap:12px}}
+  
+  <!-- FontAwesome for robust modern icons across all views -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-</style>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
+
+    :root {
+      --g: #1B4332;       /* Deep Forest Green */
+      --g2: #2D6A4F;      /* Muted Green Accent */
+      --g3: #52B788;      /* Vibrant Green Indicator */
+      --gold: #C9A84C;    /* Warm Premium Gold */
+      --gold2: #E8D48B;   /* Subtle Secondary Gold */
+      --cr: #FDF8ED;      /* Soft Cream Background */
+      --cr2: #F2E8D5;     /* Darker Shaded Cream */
+      --ink: #1C1208;     /* Luxurious Ink Charcoal */
+      --muted: #66543a;   /* Shaded Earth Muted Accent */
+      --white: #fff;
+      --bdr: rgba(27,67,50,.14);
+      --shadow: 0 12px 35px rgba(27,67,50,.12);
+      --r: 24px;          /* Clean Organic Curves */
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .arabic-font {
+      font-family: 'Amiri', serif !important;
+    }
+
+    body {
+      background-color: var(--cr);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Core Responsive App Wrapper */
+    .app-container {
+      max-width: 500px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+    }
+
+    /* Dynamic Page Transition Blocks */
+    .view {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 24px 20px;
+      animation: viewFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .view.hide {
+      display: none !important;
+    }
+
+    @keyframes viewFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Interactive UI Assets */
+    .btn-primary {
+      background-color: var(--g);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 16px 24px;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 4px 12px rgba(27,67,50,0.15);
+      cursor: pointer;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97);
+      background-color: var(--g2);
+    }
+
+    .btn-primary[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .btn-secondary {
+      background-color: var(--cr2);
+      color: var(--g);
+      border-radius: 18px;
+      padding: 16px 24px;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.25s ease;
+      border: 1.5px solid var(--bdr);
+      cursor: pointer;
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.97);
+      background-color: rgba(27,67,50,0.08);
+    }
+
+    /* MCQ Option Card Styles */
+    .option-card {
+      background-color: var(--white);
+      border: 2px solid var(--bdr);
+      border-radius: 20px;
+      padding: 18px 20px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(27,67,50,0.03);
+      width: 100%;
+    }
+
+    .option-card:hover {
+      border-color: var(--g2);
+    }
+
+    .option-card.correct {
+      background-color: #D8F3DC !important;
+      border-color: #2D6A4F !important;
+      color: #1B4332 !important;
+    }
+
+    .option-card.incorrect {
+      background-color: #FFE5EC !important;
+      border-color: #FB6F92 !important;
+      color: #800F2F !important;
+    }
+
+    /* Small Pill Badges */
+    .badge-outline {
+      border: 1.5px solid var(--bdr);
+      background: var(--white);
+      border-radius: 12px;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    /* Smooth Progress Bar Indicator */
+    .progress-bar {
+      height: 6px;
+      background-color: var(--bdr);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: var(--g3);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Multilingual Text Align Helpers */
+    .text-left-align {
+      text-align: left !important;
+      direction: ltr !important;
+    }
+
+    .text-right-align {
+      text-align: right !important;
+      direction: rtl !important;
+    }
+  </style>
 </head>
 <body>
-  <main>
-    <section id="s-home" class="screen active" aria-labelledby="home-title">
-      <header class="hero">
-        <div class="brand-mark">و</div>
-        <p class="eyebrow">Sabil Islamic Hub</p>
-        <h1 id="home-title">ورثة</h1>
-        <p class="subtitle">العلماء ورثة الأنبياء</p>
-        <p class="subtitle-en">Waratha · Islamic Knowledge Quiz</p>
-        <div class="hero-pills">
-          <span id="bank-count">389 سؤال</span>
-          <span>٦ مستويات</span>
-          <span>مشتتات أكثر منطقية</span>
+
+  <!-- Ambient Botanical Background Texture -->
+  <div class="fixed inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#1B4332_1.5px,transparent_1.5px)] [background-size:16px_16px] z-0"></div>
+
+  <div class="app-container z-10">
+
+    <!-- VIEW 1: HOME PAGE -->
+    <main id="view-home" class="view justify-between">
+      <!-- Profile & Progression Stats Bar -->
+      <div class="flex items-center justify-between border-b border-slate-200/50 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="h-11 w-11 rounded-full bg-[#1B4332]/15 text-emerald-800 flex items-center justify-center font-bold text-lg border-2 border-emerald-800/20">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+          <div>
+            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">الأداء والتقدم</span>
+            <h2 id="user-name-display" class="text-sm font-extrabold text-slate-800">زائر ورثة المميز</h2>
+          </div>
         </div>
-      </header>
-
-      <section class="stats-strip" aria-label="إحصائياتك">
-        <div><strong id="h-streak">0</strong><span>أيام متتالية</span><small>Streak</small></div>
-        <div><strong id="h-xp">0</strong><span>نقاط العلم</span><small>XP</small></div>
-        <div><strong id="h-best">0%</strong><span>أفضل نتيجة</span><small>Best</small></div>
-      </section>
-
-      <section class="panel">
-        <div class="section-title">
-          <span>اختر طريقة اللعب</span>
-          <small>Choose a mode</small>
+        <div class="flex items-center gap-1.5">
+          <div class="badge-outline flex items-center gap-1">
+            <i class="fa-solid fa-bolt text-amber-500"></i>
+            <span id="streak-count">0</span> يوماً
+          </div>
+          <div class="badge-outline flex items-center gap-1">
+            <i class="fa-solid fa-circle-nodes text-emerald-600"></i>
+            <span id="xp-points">0</span> XP
+          </div>
         </div>
-        <div class="mode-grid">
-          <button class="card mode-card" data-mode="daily">
-            <span class="icon">🌙</span><strong>التحدي اليومي</strong><em>Daily · 5 fresh questions</em><b id="daily-badge" hidden>تم اليوم</b>
-          </button>
-          <button class="card mode-card" data-mode="quick">
-            <span class="icon">⚡</span><strong>اختبار سريع</strong><em>Quick · 10 strict-level questions</em>
-          </button>
-          <button class="card mode-card" data-mode="riddle">
-            <span class="icon">🧩</span><strong>لغز</strong><em>Riddle · clue-first mode</em>
-          </button>
-          <button class="card mode-card" data-mode="marathon">
-            <span class="icon">🔥</span><strong>المسابقة</strong><em>Marathon · 40 questions, 3 lives</em>
-          </button>
+      </div>
+
+      <!-- App Branding Hero -->
+      <div class="text-center py-8 space-y-4">
+        <div class="inline-block px-4 py-1 bg-[#1B4332]/10 border border-[#1B4332]/10 rounded-full text-[11px] text-[#1B4332] font-black uppercase tracking-widest animate-pulse">
+          النسخة المحدثة 720
         </div>
-      </section>
+        <h1 class="text-4xl font-black tracking-tight text-[#1B4332] arabic-font">وَرَثَةُ الأَنْبِيَاء</h1>
+        <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">
+          بوابتك الإثرية الشاملة لتعلم علوم الشريعة، السيرة النبوية، الفقه، والحديث بأسلوب ممتع وتحديات ذكية متجددة.
+        </p>
+      </div>
 
-      <section class="note-box">
-        <strong>ملاحظة المحتوى</strong>
-        <p>تم تحسين بنك الأسئلة: فلترة صارمة للمستوى، مشتتات من نفس الباب ونفس نوع الإجابة، وألغاز بصيغة تلميح. لا تزال المادة تحتاج مراجعة علمية قبل النشر الرسمي.</p>
-      </section>
-    </section>
+      <!-- Navigation Game Modes -->
+      <div class="space-y-3.5">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1">اختر نمط اللعب</h3>
+        
+        <!-- Category Quiz Mode -->
+        <button onclick="selectMode('category')" class="w-full p-4 bg-white border-2 border-emerald-800/10 rounded-2xl text-right flex items-center justify-between hover:border-emerald-800/30 transition-all shadow-sm">
+          <div class="flex items-center gap-3.5">
+            <div class="h-11 w-11 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-700">
+              <i class="fa-solid fa-book-open text-xl"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-slate-800">اختبار التصنيفات والعلوم</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5">اختبر علمك في تخصصات محددة بتدرج مدروس</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-left text-slate-400 text-xs"></i>
+        </button>
 
-    <section id="s-level" class="screen" aria-labelledby="level-title">
-      <nav class="topbar"><button class="back" data-nav="home">← الرئيسية</button><div><strong id="level-title">اختر المستوى</strong><small>Difficulty stays strict</small></div></nav>
-      <div class="level-grid" id="level-grid"></div>
-    </section>
+        <!-- Riddle Mode -->
+        <button onclick="selectMode('riddle')" class="w-full p-4 bg-white border-2 border-emerald-800/10 rounded-2xl text-right flex items-center justify-between hover:border-emerald-800/30 transition-all shadow-sm">
+          <div class="flex items-center gap-3.5">
+            <div class="h-11 w-11 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600">
+              <i class="fa-solid fa-puzzle-piece text-xl"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-slate-800">حل فوازير الألغاز الغامضة</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5">حل أحاجي الفقه والسيرة والقرآن بالذكاء اللغوي</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-left text-slate-400 text-xs"></i>
+        </button>
 
-    <section id="s-category" class="screen" aria-labelledby="cat-title">
-      <nav class="topbar"><button class="back" data-nav="level">← المستوى</button><div><strong id="cat-title">اختر الباب</strong><small>Category</small></div></nav>
-      <div class="category-grid" id="category-grid"></div>
-      <section class="note-box compact"><strong>الفلترة الجديدة</strong><p>لن يتم سحب أسئلة من مستوى آخر. عند نفاد الأسئلة الحديثة، يعاد استخدام نفس المستوى فقط.</p></section>
-    </section>
+        <!-- Marathon Mode -->
+        <button onclick="selectMode('marathon')" class="w-full p-4 bg-white border-2 border-emerald-800/10 rounded-2xl text-right flex items-center justify-between hover:border-emerald-800/30 transition-all shadow-sm">
+          <div class="flex items-center gap-3.5">
+            <div class="h-11 w-11 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-700">
+              <i class="fa-solid fa-fire text-xl"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-slate-800">سباق ماراثون البقاء</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5">كم عدد الأسئلة المتتالية التي يمكنك إجابتها دون خطأ؟</p>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-left text-slate-400 text-xs"></i>
+        </button>
+      </div>
 
-    <section id="s-quiz" class="screen" aria-labelledby="qz-mode-ar">
-      <header class="quiz-head">
-        <button class="ghost" data-nav="home">×</button>
-        <div>
-          <strong id="qz-mode-ar"></strong>
-          <small id="qz-mode-en"></small>
+      <!-- App Footer -->
+      <footer class="text-center text-[10px] text-slate-400 pt-6">
+        جميع الحقوق محفوظة لمنصة ورثة © 2026 م
+      </footer>
+    </main>
+
+    <!-- VIEW 2: LEVEL SELECTION PAGE -->
+    <main id="view-level" class="view justify-between hide">
+      <div class="flex items-center justify-between">
+        <button onclick="nav('home')" class="h-9 w-9 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-600">
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+        <span class="text-xs font-bold text-slate-700">تحديد المستوى الأكاديمي</span>
+        <div class="w-9"></div>
+      </div>
+
+      <div class="space-y-3 my-auto py-6" id="level-list-container">
+        <!-- Loaded dynamically via JS -->
+      </div>
+
+      <p class="text-[10px] text-slate-500 text-center px-4 leading-relaxed">
+        المستويات من الأول للثالث تركز على البناء المعرفي الأساسي، بينما يركز الخامس والسادس على أصول الفقه وعلم النقد والعلل الجرئية.
+      </p>
+    </main>
+
+    <!-- VIEW 3: CATEGORY SELECTION PAGE -->
+    <main id="view-category" class="view justify-between hide">
+      <div class="flex items-center justify-between">
+        <button onclick="goBackToLevel()" class="h-9 w-9 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-600">
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+        <span class="text-xs font-bold text-slate-700">اختر تخصصك العلمي</span>
+        <div class="w-9"></div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3.5 my-auto py-6">
+        <!-- Quran -->
+        <button onclick="selectCategory('quran')" class="p-5 bg-white border border-slate-200 rounded-2xl text-center space-y-3 hover:border-emerald-600/30 transition-all">
+          <div class="h-10 w-10 mx-auto rounded-lg bg-emerald-500/10 text-emerald-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-quran"></i>
+          </div>
+          <span class="block text-xs font-extrabold text-slate-800">القرآن وعلومه</span>
+        </button>
+
+        <!-- Hadith -->
+        <button onclick="selectCategory('hadith')" class="p-5 bg-white border border-slate-200 rounded-2xl text-center space-y-3 hover:border-emerald-600/30 transition-all">
+          <div class="h-10 w-10 mx-auto rounded-lg bg-blue-500/10 text-blue-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-book"></i>
+          </div>
+          <span class="block text-xs font-extrabold text-slate-800">الحديث الشريف</span>
+        </button>
+
+        <!-- Seerah -->
+        <button onclick="selectCategory('seerah')" class="p-5 bg-white border border-slate-200 rounded-2xl text-center space-y-3 hover:border-emerald-600/30 transition-all">
+          <div class="h-10 w-10 mx-auto rounded-lg bg-amber-500/10 text-amber-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-mosque"></i>
+          </div>
+          <span class="block text-xs font-extrabold text-slate-800">السيرة النبوية</span>
+        </button>
+
+        <!-- Fiqh -->
+        <button onclick="selectCategory('fiqh')" class="p-5 bg-white border border-slate-200 rounded-2xl text-center space-y-3 hover:border-emerald-600/30 transition-all">
+          <div class="h-10 w-10 mx-auto rounded-lg bg-indigo-500/10 text-indigo-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </div>
+          <span class="block text-xs font-extrabold text-slate-800">الفقه وأصوله</span>
+        </button>
+
+        <!-- Prophets & Companions -->
+        <button onclick="selectCategory('prophets_companions')" class="p-5 bg-white border border-slate-200 rounded-2xl text-center space-y-3 hover:border-emerald-600/30 transition-all">
+          <div class="h-10 w-10 mx-auto rounded-lg bg-purple-500/10 text-purple-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <span class="block text-xs font-extrabold text-slate-800">الأنبياء والصحابة</span>
+        </button>
+
+        <!-- Hajj & Umrah -->
+        <button onclick="selectCategory('hajj_umrah')" class="p-5 bg-white border border-slate-200 rounded-2xl text-center space-y-3 hover:border-emerald-600/30 transition-all">
+          <div class="h-10 w-10 mx-auto rounded-lg bg-rose-500/10 text-rose-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-kaaba"></i>
+          </div>
+          <span class="block text-xs font-extrabold text-slate-800">الحج والعمرة</span>
+        </button>
+      </div>
+
+      <div class="w-full"></div>
+    </main>
+
+    <!-- VIEW 4: ACTIVE PLAYING ENGINE (QUIZ / MARATHON) -->
+    <main id="view-quiz" class="view justify-between hide">
+      <!-- Status & Utility Panel -->
+      <div class="flex items-center justify-between gap-4">
+        <button onclick="exitActiveSession()" class="h-8 w-8 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-500">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+
+        <!-- Dynamic Session Progress -->
+        <div class="flex-1 space-y-1.5 px-2">
+          <div class="flex items-center justify-between text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+            <span id="quiz-title-display">القرآن الكريم</span>
+            <span id="quiz-count-display">السؤال 1 / 10</span>
+          </div>
+          <div class="progress-bar">
+            <div id="qz-progress" class="progress-fill" style="width: 10%"></div>
+          </div>
         </div>
-        <div class="score"><span id="qz-score">0</span><small>XP</small></div>
-      </header>
-      <div class="progress"><span id="qz-progress"></span></div>
-      <div class="timer"><span id="qz-timer"></span></div>
-      <div id="qz-dots" class="dots"></div>
-      <article class="quiz-card">
-        <div class="badges">
-          <span id="qz-cat"></span>
-          <span id="qz-level"></span>
-          <span id="qz-lives"></span>
+
+        <!-- Language Translation Switcher -->
+        <button id="lang-toggle-btn" onclick="toggleLanguage()" class="h-8 bg-white border border-slate-200 px-2.5 rounded-lg flex items-center justify-center text-[10px] font-bold text-slate-600 gap-1 transition-all">
+          <i class="fa-solid fa-language text-sm text-emerald-600"></i> EN/عربي
+        </button>
+      </div>
+
+      <!-- Main Question & Interaction Hub -->
+      <div class="my-auto py-6 space-y-6">
+        <!-- Interactive Question Board -->
+        <div id="question-card" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-3 relative overflow-hidden transition-all">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/5 rounded-full blur-xl"></div>
+          
+          <div class="flex justify-between items-center border-b border-slate-100 pb-2.5 text-[9px] text-slate-400 font-bold uppercase">
+            <span id="q-skill-display">استذكار وحفظ</span>
+            <span id="q-id-display">Q-01</span>
+          </div>
+          <div id="q-text-container" class="text-right">
+            <p id="q-text-body" class="text-base font-extrabold text-slate-800 leading-relaxed arabic-font">--</p>
+          </div>
         </div>
-        <p id="qz-num" class="qnum"></p>
-        <p id="qz-riddle" class="riddle" hidden></p>
-        <h2 id="qz-ar"></h2>
-        <p id="qz-en" dir="ltr"></p>
-        <div id="qz-options" class="options"></div>
-        <section id="qz-explain" class="explain" hidden>
-          <p id="qz-reveal" class="reveal" hidden></p>
-          <strong id="qz-exp-ar"></strong>
-          <p id="qz-exp-en" dir="ltr"></p>
-          <small id="qz-ref" dir="ltr"></small>
-        </section>
-        <button id="qz-next" class="primary" hidden>التالي · Next</button>
-      </article>
-    </section>
 
-    <section id="s-result" class="screen" aria-labelledby="result-title">
-      <header class="result-hero">
-        <span id="result-emoji">🏁</span>
-        <h1 id="result-title">النتيجة</h1>
-        <strong id="result-score">0%</strong>
-        <p id="result-label">أحسنت</p>
-      </header>
-      <section class="result-grid">
-        <div><strong id="r-correct">0</strong><span>صحيح</span></div>
-        <div><strong id="r-wrong">0</strong><span>خطأ</span></div>
-        <div><strong id="r-xp">0</strong><span>XP</span></div>
-      </section>
-      <section class="result-actions">
-        <button id="play-again" class="primary">إعادة نفس الاختيار · Play again</button>
-        <button class="secondary" data-nav="home">الرئيسية · Home</button>
-      </section>
-    </section>
-  </main>
+        <!-- Dynamic Answer Options -->
+        <div id="options-grid" class="grid grid-cols-1 gap-3">
+          <!-- Populated dynamically via JS -->
+        </div>
 
-<script>
+        <!-- Exposition / Clarification block -->
+        <div id="exp-block" class="bg-indigo-500/5 border border-indigo-500/10 p-4 rounded-2xl text-[11px] space-y-1.5 transition-all duration-300 hidden">
+          <div class="text-indigo-600 font-bold uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-graduation-cap"></i> التوضيح والبيان الشرعي
+          </div>
+          <div id="exp-text-container" class="space-y-1">
+            <p id="exp-text-body" class="text-slate-700 leading-relaxed font-semibold">--</p>
+          </div>
+          <div class="text-[9px] text-slate-400 font-semibold uppercase tracking-wider pt-1 border-t border-indigo-500/5 mt-1" id="exp-ref-body">
+            REF: --
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Controller Button -->
+      <button id="next-btn" onclick="nextQuestion()" class="btn-primary w-full flex items-center justify-center gap-2" disabled>
+        أكد الإجابة ومواصلة <i class="fa-solid fa-chevron-left text-xs"></i>
+      </button>
+    </main>
+
+    <!-- VIEW 5: RIDDLE BOARD -->
+    <main id="view-riddle" class="view justify-between hide">
+      <div class="flex items-center justify-between">
+        <button onclick="exitActiveSession()" class="h-8 w-8 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-500">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+        <span class="text-xs font-bold text-slate-700">حل فوازير الألغاز</span>
+        <div class="w-8"></div>
+      </div>
+
+      <div class="my-auto py-6 space-y-6">
+        <!-- Riddle Showcase -->
+        <div class="bg-gradient-to-br from-amber-500/10 to-amber-600/5 border border-amber-500/20 rounded-3xl p-6 shadow-sm space-y-3 relative overflow-hidden">
+          <div class="absolute -top-8 -right-8 w-28 h-28 bg-amber-500/10 rounded-full blur-xl"></div>
+          <div class="flex items-center gap-1 text-[10px] font-bold text-amber-600 uppercase tracking-widest">
+            <i class="fa-solid fa-puzzle-piece"></i> أحجية ورثة النشطة
+          </div>
+          <p id="riddle-text" class="text-base font-bold text-slate-800 leading-relaxed arabic-font text-right">--</p>
+          <p id="riddle-text-en" class="text-xs text-slate-500 italic mt-1 leading-relaxed">--</p>
+        </div>
+
+        <!-- Options Container -->
+        <div id="riddle-options" class="grid grid-cols-1 gap-3">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <button id="riddle-next-btn" onclick="nextRiddle()" class="btn-primary w-full flex items-center justify-center gap-2" disabled>
+        التحقق والانتقال <i class="fa-solid fa-chevron-left text-xs"></i>
+      </button>
+    </main>
+
+    <!-- VIEW 6: SCORING & SUMMARY PAGE -->
+    <main id="view-result" class="view justify-between hide">
+      <div class="text-center py-6 space-y-2 border-b border-slate-200/50">
+        <h2 class="text-lg font-extrabold text-[#1B4332] uppercase tracking-wider">موجز الاختبار والأداء</h2>
+        <p class="text-[10px] text-slate-400">ملخص نقاطك والتقدم المعرفي العام</p>
+      </div>
+
+      <!-- Score visualizer card -->
+      <div class="text-center my-auto py-6 space-y-4">
+        <div id="result-emoji" class="text-6xl">🏆</div>
+        <div class="space-y-1">
+          <span id="result-score" class="text-5xl font-black text-slate-800 tracking-tight">0%</span>
+          <h3 id="result-label" class="text-base font-extrabold text-slate-800">نتيجة ممتازة!</h3>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 grid grid-cols-3 gap-2 text-center max-w-sm mx-auto shadow-sm">
+          <div>
+            <span class="block text-[9px] text-slate-400 font-bold uppercase mb-1">صحيحة</span>
+            <span id="r-correct" class="text-sm font-extrabold text-emerald-600">0</span>
+          </div>
+          <div class="border-x border-slate-100">
+            <span class="block text-[9px] text-slate-400 font-bold uppercase mb-1">خاطئة</span>
+            <span id="r-wrong" class="text-sm font-extrabold text-rose-500">0</span>
+          </div>
+          <div>
+            <span class="block text-[9px] text-slate-400 font-bold uppercase mb-1">النمط</span>
+            <span id="r-xp" class="text-sm font-extrabold text-violet-600">--</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer Links -->
+      <div class="space-y-3">
+        <button onclick="replay()" class="btn-primary w-full flex items-center justify-center gap-2">
+          إعادة الاختبار أو المواصلة <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <button onclick="nav('home')" class="btn-secondary w-full">
+          العودة للرئيسية
+        </button>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Main Game Framework & Engine Logic -->
+  <script>
 window.WARATHA_QUESTIONS = [
   {
     "id": "quran-buraam-001",
@@ -15385,49 +15756,43 @@ window.WARATHA_QUESTIONS = [
   },
   {
     "id": "hajj_umrah-mutamakkin-361",
-    "conceptId": "hajj_umrah.mutamakkin.madhhab.why-do-some-hajj-details-differ-between-madhhabs.variant-b",
+    "conceptId": "hajj_umrah-mutamakkin-361",
     "cat": "hajj_umrah",
     "level": "mutamakkin",
     "difficulty": 6,
-    "ar": "اختر السبب الأقرب للصواب: لماذا تختلف بعض تفاصيل الحج بين المذاهب؟",
-    "en": "Choose the most accurate reason: Why do some Hajj details differ between madhhabs?",
+    "ar": "كابتن طائرة مسلم متجه لجدة ينوي العمرة بعد انتهاء نوبة عمله. متى وكيف يُحرم وما حكم لباسه الرسمي؟",
+    "en": "A Muslim pilot heading to Jeddah intends Umrah after his shift ends. When and how does he enter Ihram, and what is the ruling on his uniform?",
     "opts": [
       {
-        "ar": "لأن العلماء يتعمدون الخلاف",
-        "en": "Because scholars intentionally create dispute"
+        "ar": "يؤجل نية الإحرام تماماً حتى يصل جدة دون أي التزام",
+        "en": "He postpones Ihram intention entirely until reaching Jeddah with no obligation"
       },
       {
-        "ar": "لأن النصوص غير مهمة",
-        "en": "Because texts are unimportant"
+        "ar": "يتوقف عن قيادة الطائرة عند الميقات ويرتدي ثوب الإحرام فوراً",
+        "en": "He stops flying at the Miqat and immediately changes into Ihram garments"
       },
       {
-        "ar": "لاختلاف فهم الأدلة وتقييم الروايات وتطبيق القواعد",
-        "en": "Due to differences in understanding evidence, assessing reports, and applying principles"
+        "ar": "يجوز له تأخير الإحرام حتى يحط في جدة ويغتسل في الفندق لأنه لم يكن متفرغاً للعبادة أثناء قيادة الطائرة، ويلزمه فدية لبس المخيط",
+        "en": "He is permitted to delay Ihram until landing and preparing at his hotel, since he was not free for worship while piloting, and must pay a minor expiation for the stitched uniform"
       },
       {
-        "ar": "لأن الحج بلا أصل",
-        "en": "Because Hajj has no basis"
+        "ar": "عمرته باطلة لأن تجاوز الميقات بغير إحرام لا يُغتفر",
+        "en": "His Umrah is void because bypassing the Miqat without Ihram is unforgivable"
       }
     ],
     "ans": 2,
-    "expAr": "الخلاف المعتبر في الحج يحتاج أدباً واتباعاً للعلم.",
-    "expEn": "Valid Hajj differences require manners and following knowledge.",
-    "ref": "Hajj fiqh",
-    "skill": "source_awareness",
+    "expAr": "",
+    "expEn": "According to modern jurisprudence fatwas, a pilot enters Ihram by intention at the Miqat line in the air, continues working in uniform, and after landing changes into Ihram garments. Wearing the uniform was occupational necessity, so he pays a minor expiation (Fidyat Adha) which does not invalidate the Umrah.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
     "answerType": "concept",
-    "subcategory": "madhhab",
+    "subcategory": "",
     "sensitivity": "high",
-    "reviewStatus": "draft_variant_needs_human_review",
-    "riddle": "",
-    "riddleEn": "",
-    "riddleQuality": "not_applicable_variant",
-    "sourceQuestionId": "hajj_umrah-mutamakkin-351",
-    "variantOf": "hajj_umrah-mutamakkin-351",
-    "bankLayer": "expanded_variant_b",
-    "variantType": "controlled_rewording_same_concept",
-    "conceptFamily": "hajj_umrah.mutamakkin.madhhab.why-do-some-hajj-details-differ-between-madhhabs",
-    "contentQuality": "bank_expansion_duplicate_concept_needs_review",
-    "shouldCountAsNewConcept": false
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أطير في السحاب بزي العمل الرسمي، وأعبر الميقات بنية النسك تلبيةً للواجب، وأجبر لباسي المخيط بفدية تيسير دون أن تنقص عمرتي. فمن أنا؟ (الطيار المحرم)",
+    "riddleEn": "I fly through the clouds in my official uniform, crossing the Miqat by intention to fulfill my duty, compensating for my stitched garments with an expiation of ease without diminishing my pilgrimage. Who am I? (The Pilot in Ihram)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "hajj_umrah-mutamakkin-351"
   },
   {
     "id": "hajj_umrah-mutamakkin-368",
@@ -15520,337 +15885,1471 @@ window.WARATHA_QUESTIONS = [
     "conceptFamily": "hajj_umrah.mutamakkin.documentation.why-is-recording-details-of-a-hajj-mistake-useful-before-asking",
     "contentQuality": "bank_expansion_duplicate_concept_needs_review",
     "shouldCountAsNewConcept": false
+  },
+  {
+    "id": "seerah-mutamakkin-211",
+    "conceptId": "seerah-mutamakkin-211",
+    "cat": "seerah",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "نصّ صلح الحديبية على أن من أتى محمداً من قريش بغير إذن وليه رده عليهم. كيف وفّى النبي ﷺ بهذا الشرط مع إيجاد مخرج شرعي يحمي المستضعفين الفارين لاحقاً؟",
+    "en": "The Treaty stipulated returning any Qurayshi who fled to the Muslims without guardian permission. How did the Prophet ﷺ honor this while establishing a legal safeguard for oppressed fleeing Muslims?",
+    "opts": [
+      {
+        "ar": "فسخ الشرط كلياً بعد إسلام أبي جندل مباشرة",
+        "en": "He nullified the clause entirely after Abu Jandal's conversion"
+      },
+      {
+        "ar": "التزم بردّ الرجال، ورفض ردّ النساء بنص قرآني، وترك الفارين كأبي بصير يشكلون جبهة مستقلة خارج ولاية المدينة",
+        "en": "He honored return of men, refused return of women by Quranic text, and let fugitives like Abu Basir form an independent front outside Medinan jurisdiction"
+      },
+      {
+        "ar": "طالب بتعديل البنود فرفضت قريش فنقضت المعاهدة بنفسها",
+        "en": "He demanded clause amendments; Quraysh refused, thus breaking the treaty themselves"
+      },
+      {
+        "ar": "أرسل الفارين للحبشة بدلاً من ردهم لقريش",
+        "en": "He sent fugitives to Abyssinia instead of returning them to Quraysh"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "To honor the treaty, the Prophet ﷺ returned men who arrived in Medina. When women fled (like Umm Kulthum), Surah Al-Mumtahanah forbade their return. Escapees like Abu Basir settled at Al-Ais on the coastal trade route, acting as an independent force, eventually forcing Quraysh to abolish the repatriation clause entirely.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "عهدٌ ظاهرُه حيفٌ وباطنُه فتحٌ مبين، حبسنا السيوف، وميزنا بين هجرة الرجال والنساء، وتركنا الثوار في العيص يقطعون شريان قريش التجاري حتى جاءتنا راكعة. فما أنا؟ (صلح الحديبية)",
+    "riddleEn": "A treaty whose outward appearance was unfair but whose inner reality was a manifest victory; we sheathed swords, distinguished men's and women's migration, and left the rebels at Al-Ais to sever Quraysh's trade veins until they came pleading. What am I? (Treaty of Hudaybiyyah)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "seerah-mutamakkin-201"
+  },
+  {
+    "id": "seerah-mutamakkin-212",
+    "conceptId": "seerah-mutamakkin-212",
+    "cat": "seerah",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "كيف عالج النبي ﷺ الأزمة النفسية والسياسية التي نشأت لدى الأنصار عندما عتبوا عليه لعدم إعطائهم من غنائم حنين؟",
+    "en": "How did the Prophet ﷺ resolve the psychological and political crisis when the Ansar expressed grief over being excluded from the spoils of Hunayn?",
+    "opts": [
+      {
+        "ar": "أعطاهم ضعف ما أعطى سواهم تعويضاً وجبراً لخاطرهم",
+        "en": "He gave them double what others received as compensation"
+      },
+      {
+        "ar": "طلب منهم الصبر ووعدهم بغنائم الفتوحات القادمة",
+        "en": "He asked them to be patient and promised future conquest spoils"
+      },
+      {
+        "ar": "اجتمع بهم وحدهم وقال: ألا ترضون أن يذهب الناس بالشاة والبعير وترجعون برسول الله إلى رحالكم؟ فبكوا حتى بللوا لحاهم",
+        "en": "He gathered them privately saying: 'Are you not pleased that people take sheep and camels while you return with the Messenger of Allah?' They wept until their beards were soaked"
+      },
+      {
+        "ar": "أقال قيادة الأنصار واستبدلها بمهاجرين لفرض النظام",
+        "en": "He dismissed the Ansar leadership and replaced them with Migrants to enforce order"
+      }
+    ],
+    "ans": 2,
+    "expAr": "",
+    "expEn": "The Prophet ﷺ addressed the Ansar in an exclusive gathering. He explained that he gave material wealth to those whose faith was fragile, while trusting the Ansar's deep faith. Having the Messenger of Allah ﷺ was far greater than any spoil.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "معاقبةٌ من غنائم الدنيا حُرمنا منها زهداً، فبكينا حباً لا طمعاً، حتى اشترانا الحبيبُ بأنفسنا ورضينا به نصيباً نرجع به إلى يثرب. فمن نحن؟ (الأنصار)",
+    "riddleEn": "We were denied worldly spoils out of divine wisdom; we wept from love, not greed, until the Beloved bought our devotion and we accepted him as our ultimate share. Who are we? (The Ansar)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "seerah-mutamakkin-202"
+  },
+  {
+    "id": "hadith-mutamakkin-191",
+    "conceptId": "hadith-mutamakkin-191",
+    "cat": "hadith",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "إذا روى ثقةٌ حديثاً مرسلاً ورواه ثقةٌ أوثق منه مرفوعاً متصلاً، فما هي الخطوة المنهجية التي يسلكها أئمة النقد كالبخاري وأبي حاتم للحكم على الحديث؟",
+    "en": "If a reliable narrator transmits a Hadith as Mursal while a more reliable narrator transmits it as Marfu' connected to the Prophet ﷺ, what methodological process do master critics like Al-Bukhari and Abu Hatim employ?",
+    "opts": [
+      {
+        "ar": "يُعمل بالإسناد الأعلى تلقائياً دون بحث",
+        "en": "They automatically act on the higher chain without investigation"
+      },
+      {
+        "ar": "يردون كلا الروايتين تحاشياً للتعارض",
+        "en": "They reject both narrations to avoid the conflict"
+      },
+      {
+        "ar": "يُوازن النقاد بين الرواة عدداً وحفظاً وضبطاً مع تحليل قرائن المجلس والبلدان لترجيح إحداهما واعتبار الأخرى علةً قادحة",
+        "en": "Critics balance narrators in numbers, precision, and memory, analyzing gathering and geographical factors to prefer one version and classify the other as a damaging defect"
+      },
+      {
+        "ar": "يُحيلون المسألة لأهل الفقه ليُرجّحوا بينهما",
+        "en": "They refer the matter to Fiqh scholars to adjudicate"
+      }
+    ],
+    "ans": 2,
+    "expAr": "",
+    "expEn": "Advanced Hadith criticism is not automated. Master critics weigh competing chains, study the narrator's disciples, check geographical proximity to the source, and use deep contextual clues to decide whether the connection was an error (making it Mu'allal) or the disconnection was the mistake.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا غامضٌ في عالم الإسناد، سندي كالسلسلة المذهبة لا عيب فيه للنظرة الأولى، لكن مجهر النقاد الجهابذة يكشف فيَّ علةً خفية تطرحني أرض الضعف. فمن أنا؟ (الحديث المعلول)",
+    "riddleEn": "I am mysterious in the world of chains; my transmission looks like a golden chain without apparent flaw, but the microscope of master critics reveals a hidden defect that casts me into the realm of the weak. What am I? (The Mu'allal Hadith)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "hadith-mutamakkin-181"
+  },
+  {
+    "id": "hadith-mutamakkin-192",
+    "conceptId": "hadith-mutamakkin-192",
+    "cat": "hadith",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "إذا ورد حديثان صحيحان متعارضان في الظاهر ولم يثبت تاريخ ورودهما، فما هو الترتيب المنهجي الصحيح وفق قواعد علم مختلف الحديث؟",
+    "en": "If two authentic Hadiths appear to conflict and their chronological order cannot be established, what is the correct methodological sequence according to Mukhtalif al-Hadith?",
+    "opts": [
+      {
+        "ar": "يُطرح الأضعف إسناداً فوراً دون محاولة التوفيق",
+        "en": "The weaker chain is immediately discarded without attempting reconciliation"
+      },
+      {
+        "ar": "يُقدّم الأطول نصاً لأن التفصيل يقضي على المجمل",
+        "en": "The longer text is given priority as detail overrides generality"
+      },
+      {
+        "ar": "يبدأ بالجمع والتوفيق، فإن تعذّر انتقل للترجيح بمرجحات السند والمتن، فإن تعذّر توقف حتى يظهر مرجح",
+        "en": "Begin with reconciliation; if impossible, apply preference via chain and text criteria; if that fails, suspend judgment until a factor appears"
+      },
+      {
+        "ar": "يُخيَّر العالم بين الروايتين بحسب ما يناسب مقتضى الحال",
+        "en": "The scholar chooses freely between them based on circumstances"
+      }
+    ],
+    "ans": 2,
+    "expAr": "",
+    "expEn": "Under Mukhtalif al-Hadith: first attempt Al-Jam' (reconciliation) because acting on two proofs is better than discarding one. Naskh (abrogation) is only sought if dates are known. If reconciliation fails, proceed to Tarjih (preference) using over 100 criteria. If all fail, Tawaqquf (suspension of judgment).",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا ميزان الفقيه الأصولي عند تلاطم الروايات؛ أمنع العجلة في إسقاط النصوص، أبدأ بجمع الشتات، ثم أزن بالترجيح، فلا أهمل حديثاً صح سنده ما وجدتُ سبيلاً للحياة. فمن أنا؟ (علم مختلف الحديث)",
+    "riddleEn": "I am the scale of the jurist when narrations clash; I prevent haste in discarding texts, begin by uniting them, then weigh with preference, never abandoning a sound narration as long as a path to reconcile it remains. What am I? (Science of Mukhtalif al-Hadith)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "hadith-mutamakkin-182"
+  },
+  {
+    "id": "quran-mutamakkin-111",
+    "conceptId": "quran-mutamakkin-111",
+    "cat": "quran",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "إذا نُسخ حكم آية وبقيت تلاوتها في المصحف كآية تقديم الصدقة قبل نجوى الرسول، فما هي الحكمة الأصولية والتربوية من بقاء تلاوة آية لا يُعمل بحكمها؟",
+    "en": "When a verse's ruling is abrogated yet its recitation remains in the Mushaf, what is the jurisprudential and educational wisdom in retaining the recitation of a verse whose ruling is no longer applied?",
+    "opts": [
+      {
+        "ar": "لا حكمة وهو خطأ في جمع المصحف يجب تصحيحه",
+        "en": "No wisdom — it is a compilation error that must be corrected"
+      },
+      {
+        "ar": "بقاء ثواب التلاوة، والتذكير بنعمة التخفيف ورفع المشقة، واستحضار تاريخ التشريع التدريجي لتربية الأمة",
+        "en": "Retaining recitation reward, reminding Muslims of divine mercy in lifting hardship, and reflecting on the history of gradual legislation for spiritual development"
+      },
+      {
+        "ar": "تبقى التلاوة ليستدل بها على أحكام يهود ونصارى",
+        "en": "Retained for deriving rulings applied to Jews and Christians"
+      },
+      {
+        "ar": "تبقى حتى يجتهد العلماء في إعادة تفعيل حكمها مستقبلاً",
+        "en": "Retained so scholars may eventually revive its ruling in the future"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "Keeping abrogated verse text serves profound purposes: believers earn rewards for every letter recited, it testifies to Allah's facilitation by replacing a difficult ruling with an easier one, and teaches scholars the historical development of Islamic law.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا آيةٌ منسوخة الحكم باقية الخط؛ يقرؤني المؤمن في صلاته فيُثاب، ويتذكر بي كيف رفع الله العسر عن الأمة فيحمد ربه ويشكر. فما هي صفتي؟ (منسوخة الحكم باقية التلاوة)",
+    "riddleEn": "I am a verse whose ruling is gone but whose text remains; the believer recites me in prayer to be rewarded, remembering how Allah lifted hardship from the community. What is my state? (Abrogated in ruling, retained in recitation)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "quran-mutamakkin-101"
+  },
+  {
+    "id": "quran-mutamakkin-112",
+    "conceptId": "quran-mutamakkin-112",
+    "cat": "quran",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "ما الأثر العقدي والتفسيري المترتب على اختيار موضع الوقف في قوله تعالى: {وَمَا يَعْلَمُ تَأْوِيلَهُ إِلَّا اللَّهُ وَالرَّاسِخُونَ فِي الْعِلْمِ}؟",
+    "en": "What is the theological and exegetical effect of choosing the stopping point in: 'None knows its interpretation except Allah and those firm in knowledge'? (Ali Imran 3:7)",
+    "opts": [
+      {
+        "ar": "الوقف على الجلالة واجب شرعاً بإجماع المفسرين",
+        "en": "Pausing at Allah's name is obligatory by unanimous consensus"
+      },
+      {
+        "ar": "الوقف على لفظ الجلالة يجعل التأويل بمعنى حقيقة الغيب ويختص به الله، والوصل يجعل التأويل بمعنى التفسير الذي يعلمه الراسخون",
+        "en": "Pausing at 'Allah' makes Ta'wil mean ultimate reality of the unseen known to Allah alone; connecting means Ta'wil is exegesis which scholars can know"
+      },
+      {
+        "ar": "الوقف والوصل كلاهما خطأ والآية متشابهة لا تُفسَّر",
+        "en": "Both pausing and connecting are errors; the verse is Mutashabih and cannot be interpreted"
+      },
+      {
+        "ar": "الوقف على الراسخين فقط قول واحد بإجماع",
+        "en": "Pausing at 'those firm in knowledge' is the sole unanimous position"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "If you pause at 'except Allah' (majority of early scholars), Ta'wil means the ultimate reality of things — when the Hour occurs, the exact nature of Allah's attributes — known only to Allah. If you connect 'and those firmly grounded in knowledge,' Ta'wil means exegesis and context which scholars are capable of explaining.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا الوقفُ الحاسم في آية آل عمران؛ إن لزمتني جعلتَ حقيقة الغيب سراً لربك، وإن تجاوزتني بالوصل مكّنتَ العلماء من تفكيك معاني المتشابه. فما أنا؟ (الوقف على لفظ الجلالة في آية آل عمران)",
+    "riddleEn": "I am the decisive pause in the verse of Ali Imran; if you keep me, the ultimate unseen remains Allah's secret; if you bypass me, scholars are empowered to unpack the ambiguous. What am I? (The pause at Allah's name in Ali Imran 3:7)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "quran-mutamakkin-102"
+  },
+  {
+    "id": "prophets_companions-mutamakkin-261",
+    "conceptId": "prophets_companions-mutamakkin-261",
+    "cat": "prophets_companions",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "كيف وجّه علماء الأصول تصرّفات الخضر التي ظاهرها ارتكاب منكرات شرعية مع بقاء قاعدة عصمة الشريعة؟",
+    "en": "How do Usul scholars reconcile Al-Khidr's actions — which outwardly appeared as Sharia violations — with the inviolability of Islamic law?",
+    "opts": [
+      {
+        "ar": "بأن الخضر كان نبياً فشريعته تنسخ شريعة موسى في حقه",
+        "en": "Al-Khidr was a Prophet whose law abrogated Moses' law for him"
+      },
+      {
+        "ar": "بأن الخضر تصرّف بأمر تكويني غيبي خاص أوحاه الله إليه، بينما كُلّف موسى بالحكم بالظاهر، فكلٌّ التزم بواجبه الإلهي المقرر له",
+        "en": "Al-Khidr acted upon a specific hidden decree of creation (Takwin) revealed to him, while Musa was commanded to judge by the manifest law (Tashri'); each fulfilled their divine mandate"
+      },
+      {
+        "ar": "بأن موسى كان مخطئاً في اعتراضه ويجب ألا يحكم على تصرفات الأولياء",
+        "en": "Musa was wrong to object and scholars must never judge a saint's actions"
+      },
+      {
+        "ar": "بأن القصة رمزية ليست حقيقية فلا إشكال فيها",
+        "en": "The story is symbolic not literal so no issue arises"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "Al-Khidr operated under rare direct revelation concerning hidden cosmic destiny (Takwin), serving an ultimate benevolent divine plan. Musa as Lawgiver was obligated to condemn outward violations of human life and property (Tashri'). This demonstrates that Sharia rulings are absolute for mankind even if divine wisdom operates beyond what human eyes can see.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "نحن سفينةٌ عِيبت لتُصان، وغلامٌ غاب ليعود خيراً منه، وجدارٌ أُقيم لليتامى بلا ثمن؛ عجز ميزان البشر الظاهر عن فهمنا، فكشفت لنا الغيوب عن كمال الحكمة الإلهية في الأقدار الباطنة. فمن نحن؟ (أقدار الخضر الثلاثة)",
+    "riddleEn": "We are a ship damaged to be preserved, a youth taken to be replaced by someone purer, and a wall repaired for orphans without fee; human logic failed to comprehend us, yet the unseen revealed the perfection of divine wisdom in hidden destinies. Who are we? (The three events of Al-Khidr)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "prophets_companions-mutamakkin-251"
+  },
+  {
+    "id": "prophets_companions-mutamakkin-262",
+    "conceptId": "prophets_companions-mutamakkin-262",
+    "cat": "prophets_companions",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "ما هو الأساس الأصولي الذي استند إليه أئمة السلف في تبرئة جميع الصحابة من الإثم أثناء قتال الفتنة رغم أن الدماء قد سالت؟",
+    "en": "What is the jurisprudential basis classical scholars used to absolve all Companions from sin during the civil war battles despite real bloodshed?",
+    "opts": [
+      {
+        "ar": "الشفاعة النبوية تشمل جميع الصحابة تلقائياً مهما فعلوا",
+        "en": "Prophetic intercession automatically covers all Companions regardless of their actions"
+      },
+      {
+        "ar": "كانت القتال تدريباً عسكرياً مجازياً لا قتالاً حقيقياً",
+        "en": "The battles were metaphorical military training, not real combat"
+      },
+      {
+        "ar": "الله غفر لجميع الصحابة بنص القرآن غفراناً مطلقاً شاملاً",
+        "en": "Allah forgave all Companions absolutely by Quranic text"
+      },
+      {
+        "ar": "حمل قتالهم على الاجتهاد السائغ في نوازل سياسية خفيت فيها النصوص الصريحة، والمجتهد معذور مأجور لا يلحقه إثم",
+        "en": "Classifying their combat under permissible Ijtihad in complex political crises lacking explicit texts — the mujtahid is excused, rewarded, and free of sin"
+      }
+    ],
+    "ans": 3,
+    "expAr": "",
+    "expEn": "The civil wars were not fought out of worldly greed but based on complex legal interpretations. Ali's side believed establishing central state authority took precedence. Mu'awiyah's side believed bringing Uthman's killers to justice took precedence. Both sides acted on sincere, textually supported Ijtihad, making them free of sin.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا مبدأٌ صان أعراض خيار الأمة عند تلاطم الفتن؛ جعلتُ دماءهم معصومة بالاجتهاد، وألسنتنا كافة عن الانتقاد، وقسّمتُ الأجور للمصيب والمخطئ منهم. فمن أنا؟ (الإمساك عما شجر بين الصحابة)",
+    "riddleEn": "I am a principle that protected the honor of the best of this nation during trials; I declared their blood excused by sincere reasoning, kept tongues from criticism, and distributed rewards to the correct and mistaken. What am I? (Refraining from discussing the Companions' disputes)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "prophets_companions-mutamakkin-252"
+  },
+  {
+    "id": "fiqh-mutamakkin-311",
+    "conceptId": "fiqh-mutamakkin-311",
+    "cat": "fiqh",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "إذا تعارض تطبيق مصلحة فرعية لحفظ المال مع خطر محقق يهدد النفس كانتشار وباء قاتل، فكيف يحل الأصوليون هذا التعارض بناءً على فقه الأولويات؟",
+    "en": "If a secondary interest of preserving Wealth (unrestricted commerce) conflicts with a certain threat to Life (a lethal epidemic), how do Usul scholars resolve this based on the jurisprudence of priorities?",
+    "opts": [
+      {
+        "ar": "تقديم حفظ المال لأنه أكثر الضروريات تعلقاً بالتنمية الاقتصادية",
+        "en": "Prioritize Wealth as it relates most to economic development"
+      },
+      {
+        "ar": "تقديم حفظ النفس لأن فوات النفس كلي وفوات المال جزئي والنفس هي محل الخطاب الشرعي أصلاً",
+        "en": "Prioritize Life because loss of life is absolute whereas loss of wealth is partial, and human life is the primary subject of divine law"
+      },
+      {
+        "ar": "إحالة القرار للحاكم بحسب المصلحة السياسية",
+        "en": "Defer the decision to the ruler based on political interest"
+      },
+      {
+        "ar": "التوقف عن الحكم لأن التعارض بين الضروريات لا حل له",
+        "en": "Suspend judgment as conflict between necessities has no solution"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "Preservation of Life (Hifdh an-Nafs) ranks higher than Preservation of Wealth (Hifdh al-Maal). In cases of absolute conflict, the higher necessity is prioritized because without life, wealth has no meaning and its loss is irreversible.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "إذا تباريتُ مع رفيقي المال في ميزان الضرورة، رجحتُ كفتي عليه بلا نزاع؛ لأنني مستودع الأمانة ومحل التكليف الإلهي. فما أنا؟ (حفظ النفس)",
+    "riddleEn": "If I weigh against Wealth in the scales of necessity, I outweigh it without dispute; for I am the vessel of trust and the subject of divine accountability. What am I? (Preservation of Life)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "fiqh-mutamakkin-301"
+  },
+  {
+    "id": "fiqh-mutamakkin-312",
+    "conceptId": "fiqh-mutamakkin-312",
+    "cat": "fiqh",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "إذا ذهب شخص لتبديل قطعة ذهب قديمة وزنها 20 جراماً بأخرى جديدة وزنها 18 جراماً مع دفع فارق المصنعية نقداً، فما التكييف الفقهي الصحيح لهذا العقد؟",
+    "en": "If someone exchanges an old 20g gold piece for a new 18g piece paying the craftsmanship difference in cash, what is the correct jurisprudential classification of this transaction?",
+    "opts": [
+      {
+        "ar": "جائز لأن الفارق سُدّد نقداً والنقد لا يُعدّ من الجنس",
+        "en": "Permissible because the difference was paid in cash and cash is not the same commodity"
+      },
+      {
+        "ar": "لا يجوز ويقع في ربا الفضل وربا النسيئة معاً؛ لوجوب التماثل وزناً والتقابض فوراً بغض النظر عن الجودة والصياغة",
+        "en": "Impermissible — falls into both Riba al-Fadl and Riba al-Nasiah because equal weight and immediate exchange are mandatory regardless of craftsmanship"
+      },
+      {
+        "ar": "جائز لأن الصياغة تخرج الذهب عن حكم الجنس الربوي",
+        "en": "Permissible because manufacturing transforms gold out of the ribawi commodity category"
+      },
+      {
+        "ar": "مكروه فقط ويجبره التصدق بشيء من المال",
+        "en": "Only disliked, compensated by giving some charity"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "The majority of classical scholars rule that gold whether raw or manufactured is a ribawi commodity. Any exchange of gold for gold must be equal weight (Mithlan bi-Mithl) and immediate (Yadan bi-Yad). Paying cash for craftsmanship breaks equal weight, resulting in Riba al-Fadl.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا شرطٌ صارم في مبادلة الذهب بالذهب؛ ألغي قيمة الفنون وأساوي بين التبر المصوغ والذهب العتيق في كفة الميزان. فمن أنا؟ (التماثل في الوزن)",
+    "riddleEn": "I am a strict condition in exchanging gold for gold; I ignore craftsmanship value and treat raw dust and manufactured crowns equally on the scale. What am I? (Equality of Weight)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "fiqh-mutamakkin-302"
+  },
+  {
+    "id": "hajj_umrah-mutamakkin-362",
+    "conceptId": "hajj_umrah-mutamakkin-362",
+    "cat": "hajj_umrah",
+    "level": "mutamakkin",
+    "difficulty": 6,
+    "ar": "مريض نُقل بسيارة إسعاف ومرّ بحدود عرفة مغمى عليه ولم يُفق إلا في المستشفى بعد طلوع فجر يوم النحر. هل يصح وقوفه؟",
+    "en": "A patient was transported by ambulance, passed through Arafah's boundaries while unconscious, and only regained consciousness at the hospital after the dawn of Eid day. Is his standing at Arafah valid?",
+    "opts": [
+      {
+        "ar": "لا يصح وقوفه لأن العقل شرط لصحة العبادة بالإجماع",
+        "en": "His standing is invalid because consciousness is a condition of worship by consensus"
+      },
+      {
+        "ar": "يصح وقوفه وحجه صحيح عند جمهور الفقهاء لأن اشتراط الاستيقاظ ليس من شروط صحة المرور بعرفة",
+        "en": "His standing is valid and Hajj correct per the majority — being conscious is not a condition for the validity of passing through Arafah"
+      },
+      {
+        "ar": "وقوفه صحيح لكن يلزمه إعادة الحج كاملاً في العام القادم",
+        "en": "His standing is valid but he must repeat the entire Hajj next year"
+      },
+      {
+        "ar": "يلزمه التوبة فقط دون أي جبر شرعي",
+        "en": "He only needs repentance without any legal compensation"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "According to the majority of scholars, being awake or conscious is not a prerequisite for the validity of Wuquf at Arafah. If a pilgrim in Ihram passes through any part of Arafah during the legal timeframe — even asleep or unconscious in an ambulance — the pillar of Wuquf is fully satisfied.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "قطعتُ أرض الرحمة وأنا مغيّب العقل في مركبتي، لم أردد التلبية ولم أرفع يدي، ومع ذلك كُتب لي القبول وأُنقذ حجي من الفوات. فما هي صفتي؟ (المرور بعرفة مغمى عليه)",
+    "riddleEn": "I crossed the land of mercy while my mind was asleep in my vehicle; I did not repeat the Talbiyah nor raise my hands, yet my standing was accepted and my pilgrimage saved. What was my state? (Passing through Arafah while unconscious)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "hajj_umrah-mutamakkin-352"
+  },
+  {
+    "id": "quran-mutaqaddim-091",
+    "conceptId": "quran-mutaqaddim-091",
+    "cat": "quran",
+    "level": "mutaqaddim",
+    "difficulty": 5,
+    "ar": "عندما نزلت آيات الظهار في سورة المجادلة بسبب امرأة اشتكت زوجها للنبي ﷺ، كيف طُبّقت هذه الآيات بناءً على قاعدة عموم اللفظ؟",
+    "en": "When the verses of Zihar were revealed in Surah Al-Mujadilah because of a woman who complained about her husband, how were these verses applied based on the maxim of 'generality of wording'?",
+    "opts": [
+      {
+        "ar": "اقتصر حكم كفارة الظهار على تلك المرأة وزوجها فقط باعتبارهما سبب النزول",
+        "en": "The ruling of Zihar expiation was restricted only to that woman and her husband as the specific cause"
+      },
+      {
+        "ar": "طُبّق حكم الكفارة على زوجها وعلى كل مسلم يقع في نفس القول إلى يوم القيامة لأن النص جاء بصيغة العموم",
+        "en": "The ruling was applied to her husband and every Muslim who commits Zihar until the Day of Resurrection because the text was revealed in a general form"
+      },
+      {
+        "ar": "عُدّلت شروط الكفارة لتناسب بقية الصحابة بينما بقيت مخففة لصاحبة الواقعة",
+        "en": "The expiation conditions were modified for other Companions while remaining alleviated for the original woman"
+      },
+      {
+        "ar": "أُسقطت عقوبة الظهار عن الأمة لخصوصية الواقعة",
+        "en": "The penalty of Zihar was dropped from the community due to the specificity of the first incident"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "Although the verses were revealed specifically for Khawlah bint Tha'labah and her husband Aws ibn al-Samit, the ruling of expiation (Kaffarah) immediately became a general, binding law for all Muslims who commit Zihar — proving that 'the lesson is in the generality of the wording.'",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا واقعةُ أوسٍ وخولة في مجادلة الوحي؛ كنتُ سبباً خاصاً فريداً، لكن الله جعلني باباً عاماً لتشريع يحمي كرامة المرأة المسلمة في كل زمان ومكان. فمن أنا؟ (حادثة الظهار)",
+    "riddleEn": "I am the dispute of Aws and Khawlah before revelation; I was a unique specific cause, yet Allah turned me into a universal gateway for legislation protecting Muslim women's dignity everywhere. Who am I? (The Incident of Zihar)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "quran-mutaqaddim-81"
+  },
+  {
+    "id": "hadith-mutaqaddim-171",
+    "conceptId": "hadith-mutaqaddim-171",
+    "cat": "hadith",
+    "level": "mutaqaddim",
+    "difficulty": 5,
+    "ar": "إذا عُرف راوٍ ثقةٌ بارتكاب التدليس، فما هو الشرط الصارم الذي وضعه نقاد الحديث لقبول مروياته الفردية؟",
+    "en": "If a trustworthy narrator is known to commit Tadlis, what strict condition did Hadith critics establish to accept his individual narrations?",
+    "opts": [
+      {
+        "ar": "تُرفض جميع مروياته بالكامل ويُعامل كالكذابين",
+        "en": "All his narrations are rejected completely and he is treated like liars"
+      },
+      {
+        "ar": "تُقبل مروياته مطلقاً لأن وصفه بالثقة كافٍ لجبر التدليس",
+        "en": "His narrations are accepted unconditionally because being 'trustworthy' is sufficient"
+      },
+      {
+        "ar": "لا يُقبل منه إلا ما صرّح فيه بالسماع المباشر كـ سمعتُ أو حدثنا ويُرد ما رواه بلفظ محتمل كـ عن",
+        "en": "Only what he explicitly states to have heard directly using 'I heard' or 'He narrated to us' is accepted; what he reports using ambiguous terms like 'from' is rejected"
+      },
+      {
+        "ar": "تُقبل روايته بشرط أن يعضدها إسناد مرسل من طبقة التابعين",
+        "en": "His narration is accepted only if supported by a Mursal chain from the Tabi'in generation"
+      }
+    ],
+    "ans": 2,
+    "expAr": "",
+    "expEn": "To prevent hidden disconnections, critics rule that if a trustworthy narrator is classified as a Mudallis, his narrations using ambiguous terms ('An'anah) are suspended. They are only accepted when he explicitly declares direct hearing (Sama'), removing any suspicion of an intermediary gap.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا اللفظُ الحاسم في مرويات المدلسين؛ بوجودي ينقلب الظنّ يقيناً ويُقبل السند المريب، وبغيابي أسقط في قاع التعليق. فمن أنا؟ (التصريح بالسماع)",
+    "riddleEn": "I am the decisive word in reports of those who conceal; with my presence suspicion turns to certainty and the questionable chain is accepted; without me it drops into suspension. What am I? (Explicit declaration of hearing / Sama')",
+    "riddleQuality": "human-crafted",
+    "variantOf": "hadith-mutaqaddim-161"
+  },
+  {
+    "id": "seerah-mutaqaddim-191",
+    "conceptId": "seerah-mutaqaddim-191",
+    "cat": "seerah",
+    "level": "mutaqaddim",
+    "difficulty": 5,
+    "ar": "بناءً على بنود دستور المدينة، كيف تم تحديد مرجعية التحكيم العليا عند وقوع النزاعات الكبرى بين الفصائل الموقعة على الصحيفة؟",
+    "en": "Based on the Constitution of Medina, how was the supreme arbitration authority determined in major disputes among the signatory factions?",
+    "opts": [
+      {
+        "ar": "يرجع كل فصيل إلى رئيس قبيلته ليفصل في الأمر بشكل مستقل",
+        "en": "Each faction refers to their tribal chief to settle matters independently"
+      },
+      {
+        "ar": "أن يُرد النزاع إلى الله عز وجل وإلى رسوله محمد ﷺ كمرجعية قضائية عليا ملزمة للجميع",
+        "en": "Any dispute must be referred back to Allah and His Messenger Muhammad ﷺ as the binding supreme judicial authority for all"
+      },
+      {
+        "ar": "تدويل الحكم وعرضه على سادة مكة من قريش باعتبارهم أهل الخبرة القضائية",
+        "en": "Internationalizing the dispute and presenting it to Quraysh as judicial experts"
+      },
+      {
+        "ar": "اللجوء للقرعة لفض المنازعات تجنباً لانحياز أي طرف",
+        "en": "Resorting to drawing lots to avoid bias"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "The Constitution of Medina legally consolidated Prophetic authority by establishing Muhammad ﷺ as supreme arbitrator for all citizens — including non-Muslim factions — in major disputes. This effectively established Medina as a unified constitutional state under a single sovereign legal system.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا البندُ الأكبر في وثيقة يثرب؛ ألقيتُ بظلال السيادة النبوية على المنازعات وأنهيتُ عهد التحكيم القبلي الجاهلي لأجعل حكم السماء هو الفيصل الأعلى. فمن أنا؟ (مرجعية التحكيم لله والرسول)",
+    "riddleEn": "I am the supreme clause in the Charter of Yathrib; I cast prophetic authority over disputes, ending Jahiliyyah tribal feuds to make divine judgment the ultimate arbitrator. What am I? (Referral of disputes to Allah and the Messenger)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "seerah-mutaqaddim-181"
+  },
+  {
+    "id": "fiqh-mutaqaddim-291",
+    "conceptId": "fiqh-mutaqaddim-291",
+    "cat": "fiqh",
+    "level": "mutaqaddim",
+    "difficulty": 5,
+    "ar": "كيف طبّق الأصوليون قاعدة تحوّل الأمر من الوجوب إلى الإباحة في قوله تعالى: {فَإِذَا قُضِيَتِ الصَّلَاةُ فَانتَشِرُوا فِي الْأَرْضِ}؟",
+    "en": "How did legal theorists apply the rule of a command shifting from Obligation to Permissibility in: 'When the prayer is concluded, then disperse throughout the land' (Al-Jumu'ah 62:10)?",
+    "opts": [
+      {
+        "ar": "اعتبروا الانتشار في الأرض فرضاً عيناً يأثم المسلم بالبقاء في المسجد",
+        "en": "They considered dispersing obligatory — a Muslim sins by staying in the mosque after prayer"
+      },
+      {
+        "ar": "حملوا الأمر على الإباحة لأن الانتشار جاء بعد حظر ومنع وهو النداء للصلاة، والأمر بعد الحظر يفيد الإباحة عند جمهور الأصوليين",
+        "en": "They interpreted the command as permissible because dispersing came after a prohibition — the call to prayer — and a command following a prohibition implies permissibility per the majority"
+      },
+      {
+        "ar": "حملوه على الاستحباب الشديد للتجارة وطلب الرزق حصراً",
+        "en": "They interpreted it as highly recommended exclusively for trade and seeking livelihood"
+      },
+      {
+        "ar": "اعتبروه منسوخاً بآيات وجوب المكث لذكر الله بعد الفرائض",
+        "en": "They considered it abrogated by verses mandating staying for Allah's remembrance after obligatory prayers"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "A foundational rule in Usul al-Fiqh states that a command issued immediately after a prohibition (Al-Amr ba'da al-Hadhri) reverts the legal status back to its default: permissibility (Ibahah). Since trading was prohibited during the Friday call, 'then disperse' simply restores the permission to do so.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا القاعدة الأصولية التي تفكّ قيود الوجوب الصارم؛ إذا جئتُ بعد المنع قلتُ للمكلف: أنت حرٌّ الآن. فمن أنا؟ (الأمر بعد الحظر يفيد الإباحة)",
+    "riddleEn": "I am the legal rule that unlocks the chains of strict obligation; if I arrive after a prohibition, I say to the believer: you are free now. What am I? (A command after prohibition implies permissibility)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "fiqh-mutaqaddim-281"
+  },
+  {
+    "id": "prophets_companions-mutaqaddim-231",
+    "conceptId": "prophets_companions-mutaqaddim-231",
+    "cat": "prophets_companions",
+    "level": "mutaqaddim",
+    "difficulty": 5,
+    "ar": "ما هو المرتكز الشرعي والسياسي الذي أقنع به المهاجرون الأنصار بضرورة أن تكون الخلافة في قريش أثناء نقاشات السقيفة؟",
+    "en": "What was the primary jurisprudential and political argument with which the Emigrants convinced the Ansar that the Caliphate must remain with Quraysh during the Saqifah debates?",
+    "opts": [
+      {
+        "ar": "الادعاء بوجود آية صريحة في القرآن تنص على توريث الحكم لقريش",
+        "en": "Claiming the existence of an explicit Quranic verse mandating hereditary rule for Quraysh"
+      },
+      {
+        "ar": "الاستناد لقول النبي ﷺ الأئمة من قريش لأن العرب لا تدين بالطاعة إلا لهذا البيت تحقيقاً لمصلحة وحدة الأمة",
+        "en": "Relying on the Prophet's ﷺ statement 'Leaders are from Quraysh' because Arab tribes would only unite under this tribe, preserving unity and preventing civil strife"
+      },
+      {
+        "ar": "التهديد بالقوة العسكرية لإخضاع الأنصار للبيعة",
+        "en": "Threatening military force to compel the Ansar into pledging allegiance"
+      },
+      {
+        "ar": "تأجيل البيعة وعقد انتخابات عامة تشارك فيها وفود القبائل",
+        "en": "Postponing the pledge and calling for general elections involving tribal delegations"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "Abu Bakr RA used a profound sociopolitical argument based on the Sunnah. Quraysh's high status among Arab tribes made them uniquely positioned for geopolitical stability. The Ansar recognized this wisdom, prioritizing the public interest (Maslahah) of Islamic unity.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا المكانُ الذي شهدَ ولادة النظام السياسي الأول في الإسلام؛ حبسنا الخلاف داخل أسواري بالشورى والحجة وخرجنا ببيعة أنقذت سفينة الأمة. فمن أنا؟ (سقيفة بني ساعدة)",
+    "riddleEn": "I am the place that witnessed the birth of the first political system in Islam; we resolved the leadership crisis within my walls through consultation and proof, emerging with an allegiance that saved the nation. What am I? (Saqifat Bani Sa'idah)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "prophets_companions-mutaqaddim-221"
+  },
+  {
+    "id": "hajj_umrah-mutaqaddim-331",
+    "conceptId": "hajj_umrah-mutaqaddim-331",
+    "cat": "hajj_umrah",
+    "level": "mutaqaddim",
+    "difficulty": 5,
+    "ar": "مع شدة التزاحم وخطر التدافع الحديث، ما هو المخرج الفقهي المعتمد للتيسير على الحجاج العاجزة بالرمي قبل الزوال في أيام التشريق؟",
+    "en": "Given modern danger of severe crowding and stampedes, what is the recognized jurisprudential concession for weak pilgrims to stone before midday (Zawal) on the Days of Tashreeq?",
+    "opts": [
+      {
+        "ar": "إلغاء ركن الرمي بالكامل عن جميع الحجاج دون حاجة لفدية",
+        "en": "Canceling the stoning rite entirely for all pilgrims without expiation"
+      },
+      {
+        "ar": "الأخذ بروايات جواز الرمي قبل الزوال كرواية عن الإمام أحمد ومذهب بعض السلف، تيسيراً ودفعاً للمشقة المحققة",
+        "en": "Adopting narrations permitting stoning before Zawal — such as a report from Imam Ahmad and some early scholars — to facilitate ease and prevent proven hardship"
+      },
+      {
+        "ar": "تأخير كل الرمي ليُفعل دفعة واحدة في مكة بعد انتهاء أيام الحج",
+        "en": "Delaying all stoning to be performed at once in Makkah after Hajj days end"
+      },
+      {
+        "ar": "النيابة التامة للجميع بحيث يرمي رجال الأمن عن الحجاج كافة",
+        "en": "Full proxy stoning for everyone by security personnel"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "Contemporary fatwa bodies including the International Islamic Fiqh Academy permit stoning before Zawal during Tashreeq days for the elderly, women, and those in congested groups. This applies the legal maxim: 'Hardship brings ease,' based on classical minority opinions from Imam Ahmad, Al-Baqir, and Abu Ja'far.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا الوقتُ الذي وسّعه الفقهاء المعاصرون دفعاً للمشقة؛ كنتُ عند الجمهور محظوراً قبل الظهر فصرتُ رخصةً منجيةً للحجاج الضعاف تحت لهيب الشمس وخطر الزحام. فمن أنا؟ (الرمي قبل الزوال)",
+    "riddleEn": "I am the timeframe expanded by contemporary jurists to prevent hardship; I was restricted before midday by the majority, yet became a life-saving concession for vulnerable pilgrims. What am I? (Stoning before Zawal)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "hajj_umrah-mutaqaddim-321"
+  },
+  {
+    "id": "hadith-mutaallim-151",
+    "conceptId": "hadith-mutaallim-151",
+    "cat": "hadith",
+    "level": "mutaallim",
+    "difficulty": 4,
+    "ar": "إذا جمع الإمام الترمذي في سننه بين الوصفين لحديث واحد فقال: حديث حسن صحيح، فكيف يفسر نقاد الحديث هذا الجمع الظاهري؟",
+    "en": "If Imam al-Tirmidhi combines both descriptions for a single Hadith calling it 'Hasan Sahih,' how do Hadith critics explain this seemingly contradictory combination?",
+    "opts": [
+      {
+        "ar": "كُتب خطأً من كُتّاب المخطوطات وأصله إما حسن أو صحيح",
+        "en": "It was written in error by manuscript copyists; it is either Hasan or Sahih alone"
+      },
+      {
+        "ar": "الحديث صحيح في أول النهار وحسن في آخره بحسب تغير حفظ الرواة",
+        "en": "The Hadith is Sahih early in the day and Hasan later based on changes in narrators' memory"
+      },
+      {
+        "ar": "الحديث رُوي بأكثر من إسناد؛ أحدها صحيح والآخر حسن، أو أنه حسن عند قوم وصحيح عند آخرين",
+        "en": "The Hadith was transmitted via multiple chains — one Sahih and one Hasan — or it is Hasan according to one group and Sahih according to another"
+      },
+      {
+        "ar": "الدرجة تتراجح بين الضعيف والموضوع لكنه استعمل لفظاً مجازياً",
+        "en": "The grade fluctuates between weak and fabricated but he used a metaphorical term"
+      }
+    ],
+    "ans": 2,
+    "expAr": "",
+    "expEn": "'Hasan Sahih' generally means either: 1) The Hadith has two or more chains, one meeting Sahih conditions and the other Hasan, or 2) It is in a middle ground where some scholars graded it Sahih while others graded it Hasan.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا العبارةُ الشهيرة في جامع الترمذي؛ أجمعُ بين صفتين ظاهرهما التفاوت، وأفتحُ للنقاد باباً لتتبع الطرق والأسانيد المتعددة للحديث الواحد. فمن أنا؟ (حديث حسن صحيح)",
+    "riddleEn": "I am the famous phrase in the Jami' of al-Tirmidhi; I combine two descriptions whose outward appearance differs, opening a gate for critics to trace multiple chains for a single narration. What am I? (Hasan Sahih)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "hadith-mutaallim-141"
+  },
+  {
+    "id": "fiqh-mutaallim-271",
+    "conceptId": "fiqh-mutaallim-271",
+    "cat": "fiqh",
+    "level": "mutaallim",
+    "difficulty": 4,
+    "ar": "صلى أحمد العشاء، وأثناء جلوسه للتشهد الأول قام مباشرة للركعة الثالثة دون أن يجلس، وتذكر بعد أن استتم قائماً. ماذا يجب عليه أن يفعل؟",
+    "en": "Ahmad was praying Isha. During the sitting for the first Tashahhud, he stood directly for the third unit without sitting, and remembered only after standing fully upright. What must he do?",
+    "opts": [
+      {
+        "ar": "يجب عليه العودة فوراً للجلوس والإتيان بالتشهد ثم يكمل صلاته",
+        "en": "He must immediately sit back down, perform Tashahhud, then continue"
+      },
+      {
+        "ar": "تبطل صلاته فوراً ويجب عليه إعادتها من البداية",
+        "en": "His prayer is immediately invalidated and must be restarted"
+      },
+      {
+        "ar": "يستمر قائماً ولا يرجع للتشهد ويكمل صلاته ثم يسجد سجدتين للسهو قبل السلام",
+        "en": "He continues standing and does not return to sit, completes his prayer, then performs two prostrations of forgetfulness before the Tasleem"
+      },
+      {
+        "ar": "يجلس مباشرة للتشهد ويسجد أربع سجدات بعد السلام للتعويض",
+        "en": "He sits for Tashahhud and performs four prostrations after Tasleem"
+      }
+    ],
+    "ans": 2,
+    "expAr": "",
+    "expEn": "If a praying person stands fully upright forgetting the first Tashahhud, it is disliked to sit back down. Instead they continue the prayer. Because a mandatory act (Wajib) was omitted, they perform Sujud al-Sahw before the final Tasleem.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "نسيتُ الجلوسَ فنهضتُ مستوياً، فناداني المأمومون بالتسبيح، فلم أنحنِ بل أكملتُ وسجدتُ قبل السلام لأجبرَ فريضتي. فمن أنا؟ (المستتم قائماً الناسي للتشهد)",
+    "riddleEn": "I forgot to sit and stood fully upright; the congregation said SubhanAllah to correct me, yet I did not bend back. I completed and prostrated before Tasleem to mend my obligation. Who am I? (One who stood fully upright having forgotten Tashahhud)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "fiqh-mutaallim-261"
+  },
+  {
+    "id": "seerah-mubtadi-171",
+    "conceptId": "seerah-mubtadi-171",
+    "cat": "seerah",
+    "level": "mubtadi",
+    "difficulty": 3,
+    "ar": "عندما أرسلت قريش وفداً للنجاشي لإرجاع المسلمين من الحبشة، ما هي السورة التي تلاها جعفر بن أبي طالب ليوضح حقيقة الإسلام؟",
+    "en": "When Quraysh sent a delegation to the Negus to repatriate the Muslims from Abyssinia, which Surah did Ja'far ibn Abi Talib recite to clarify Islam?",
+    "opts": [
+      {
+        "ar": "سورة الفاتحة",
+        "en": "Surah Al-Fatiha"
+      },
+      {
+        "ar": "سورة مريم",
+        "en": "Surah Maryam"
+      },
+      {
+        "ar": "سورة البقرة",
+        "en": "Surah Al-Baqarah"
+      },
+      {
+        "ar": "سورة يوسف",
+        "en": "Surah Yusuf"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "In the presence of the Christian king Negus and his bishops, Ja'far ibn Abi Talib recited the opening verses of Surah Maryam, detailing the miraculous birth of Isa (Jesus) ﷺ. This deeply moved the Negus, prompting him to grant the Muslims absolute sanctuary.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا السورةُ التي هزّت منبرَ النجاشي؛ رتلني جعفرٌ بقلبٍ ثابت في أرض الغربة، فبكى الملكُ حتى بلّل لحيته وأعلن الأمانَ لصحابة أحمد رغم وفد مكة. فمن أنا؟ (سورة مريم)",
+    "riddleEn": "I am the Surah that shook the court of the Negus; Ja'far recited me with a steadfast heart in a foreign land, making the king weep until his beard was soaked, declaring safety for the Companions. What am I? (Surah Maryam)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "seerah-mubtadi-161"
+  },
+  {
+    "id": "quran-mubtadi-071",
+    "conceptId": "quran-mubtadi-071",
+    "cat": "quran",
+    "level": "mubtadi",
+    "difficulty": 3,
+    "ar": "كيف جمع علماء التفسير بين نزول القرآن في ليلة القدر جملة واحدة وبين نزوله مفرقاً على مدار ثلاث وعشرين سنة؟",
+    "en": "How do Quranic commentators reconcile the Quran being revealed all at once on Laylat al-Qadr with its gradual revelation over twenty-three years?",
+    "opts": [
+      {
+        "ar": "بنفي نزوله في ليلة القدر واعتبار ذلك من الرمزيات فقط",
+        "en": "By denying its revelation on Laylat al-Qadr, treating it as purely symbolic"
+      },
+      {
+        "ar": "نزل جملة واحدة في ليلة القدر إلى بيت العزة في السماء الدنيا، ثم نزل مفرقاً منجماً على الأرض بواسطة جبريل بحسب الوقائع",
+        "en": "It descended all at once on Laylat al-Qadr to Bayt al-Izzah in the lowest heaven, then descended gradually to Earth via Jibril according to events"
+      },
+      {
+        "ar": "التنزيل كان كاملاً للصحابة الأوائل ثم أُعيد ترتيبه تدريجياً لعامة الناس",
+        "en": "The revelation was complete for the first generation then rearranged gradually for the general public"
+      },
+      {
+        "ar": "نزل نصفه في مكة ونصفه الآخر جملة في المدينة",
+        "en": "Its first half descended in Makkah and its second half all at once in Madinah"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "Commentators like Ibn Abbas explained two distinct stages: first, the Quran descended as a whole from the Preserved Tablet to the House of Might (Bayt al-Izzah) in the lowest heaven on Laylat al-Qadr. Second, Jibril brought it down to earth in portions over 23 years.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا المحطةُ الأولى التي استقبلتْ كتابَ الله جملةً واحدةً في ليلة مباركة، قبل أن تنقله الملائكة نجوماً مفرقة لتضيء دروب البشر على الأرض. فمن أنا؟ (بيت العزة في السماء الدنيا)",
+    "riddleEn": "I am the first station that received the Book of Allah all at once on a blessed night, before angels carried its verses gradually to illuminate human paths on earth. What am I? (Bayt al-Izzah in the lowest heaven)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "quran-mubtadi-61"
+  },
+  {
+    "id": "hajj_umrah-nashi-131",
+    "conceptId": "hajj_umrah-nashi-131",
+    "cat": "hajj_umrah",
+    "level": "nashi",
+    "difficulty": 2,
+    "ar": "أدى صالح مناسك العمرة كاملة، ولكنه غادر مكة وعاد إلى بلده دون أن يحلق رأسه أو يقصر شعره نسياناً. ما هو الحكم؟",
+    "en": "Saleh completed his Umrah but returned home having forgotten to shave or shorten his hair. What is the ruling on his Umrah?",
+    "opts": [
+      {
+        "ar": "عمرته باطلة بالكامل ويجب عليه السفر فوراً لإعادتها",
+        "en": "His Umrah is completely invalid and he must travel back immediately to repeat it"
+      },
+      {
+        "ar": "عمرته صحيحة، ولكنه ترك واجباً يلزمه فيه ذبح شاة فدية جبر في مكة توزّع على الفقراء",
+        "en": "His Umrah is valid, but he missed an obligation requiring him to sacrifice a sheep in Makkah to be distributed to the poor"
+      },
+      {
+        "ar": "لا شيء عليه طالما أنه طاف وسعى",
+        "en": "Nothing is required as long as he performed Tawaf and Sa'y"
+      },
+      {
+        "ar": "يلزمه إعادة الطواف فقط سبع مرات في بيته بدلاً من الحلق",
+        "en": "He only needs to repeat Tawaf seven times at home instead of shaving"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "Shaving or shortening hair is a mandatory obligation (Wajib) in Umrah, not a pillar (Rukn). If a pilgrim forgets it and returns home, the Umrah is still valid, but they must offer a compensatory sacrifice (Dam) to make up for the missed requirement.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "طفتُ وسعيتُ بصدق ونية، لكني نسيتُ أن آخذ من شعري شيئاً حتى عُدتُ لبلدي؛ عمرتي مقبولة، فماذا أقدم لجبر النقص الذي تركته خلفي؟ (فدية دم / ذبح شاة)",
+    "riddleEn": "I performed Tawaf and Sa'y with sincerity, but forgot to cut my hair before returning home; my Umrah is accepted, but what must I offer to mend the missed obligation I left behind? (A compensatory animal sacrifice)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "hajj_umrah-nashi-121"
+  },
+  {
+    "id": "prophets_companions-nashi-111",
+    "conceptId": "prophets_companions-nashi-111",
+    "cat": "prophets_companions",
+    "level": "nashi",
+    "difficulty": 2,
+    "ar": "كيف تحقق حلم يوسف عليه السلام برؤية الكواكب والشمس والقمر ساجدين له بعد عشرات السنين في نهاية قصته؟",
+    "en": "How was Yusuf's ﷺ childhood dream of the stars, sun, and moon prostrating to him fulfilled decades later at the end of his story?",
+    "opts": [
+      {
+        "ar": "عندما نزل المطر الغزير بعد سبع سنوات من القحط في مصر",
+        "en": "When heavy rain fell after seven years of drought in Egypt"
+      },
+      {
+        "ar": "عندما رفع أبويه على العرش وخرّ له أبواه وإخوته الأحد عشر ساجدين سجود تحية وتكريم",
+        "en": "When he raised his parents on the throne and his parents and eleven brothers fell prostrate before him in greeting and honor"
+      },
+      {
+        "ar": "عندما عاد بصر أبيه يعقوب بمجرد إلقاء قميصه على وجهه",
+        "en": "When his father Ya'qub's eyesight was restored upon the shirt touching his face"
+      },
+      {
+        "ar": "عندما سجد له أهل مصر طاعةً بعد إدارته لخزائن الأرض",
+        "en": "When the people of Egypt prostrated to him in obedience for managing the state storehouses"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "The dream was fulfilled when Yusuf ﷺ became Egypt's chief administrator. His parents (the sun and moon) and eleven brothers (the eleven stars) traveled to Egypt and prostrated before him in greeting, honor, and respect.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "رأيتُ المجدَ صغيراً فسجدتْ لي الكواكبُ في المنام، ورفعتُ والديّ كبيراً على عرش مصر فتحقق الوعد وزال الألم. فمن أنا؟ (يوسف عليه السلام)",
+    "riddleEn": "I saw my future honor as a child when stars prostrated to me in a dream, and as an adult in Egypt raised my parents upon the throne, fulfilling the promise and ending years of grief. Who am I? (Prophet Yusuf)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "prophets_companions-nashi-101"
+  },
+  {
+    "id": "quran-buraam-021",
+    "conceptId": "quran-buraam-021",
+    "cat": "quran",
+    "level": "buraam",
+    "difficulty": 1,
+    "ar": "لماذا أنزل الله سورة الكوثر القصيرة ليفرح بها النبي ﷺ ويواسيه؟",
+    "en": "Why did Allah reveal the short Surah Al-Kawthar to comfort and reassure the Prophet ﷺ?",
+    "opts": [
+      {
+        "ar": "ليعلمه كيف يصلي صلاة العيد مع المسلمين لأول مرة",
+        "en": "To teach him how to perform Eid prayer for the first time"
+      },
+      {
+        "ar": "ليواسيه بعد وفاة ابنه القاسم واستهزاء الكفار به ووصفهم له بالأبتر المقطوع من الأولاد",
+        "en": "To comfort him after the death of his infant son Al-Qasim, when Quraysh mocked him as 'abtar' — cut off from lineage"
+      },
+      {
+        "ar": "ليبشره بفتح مكة وانتهاء عبادة الأصنام",
+        "en": "To give glad tidings of the Conquest of Makkah and end of idol worship"
+      },
+      {
+        "ar": "ليوضح له شروط صيام شهر رمضان",
+        "en": "To explain the conditions of fasting Ramadan"
+      }
+    ],
+    "ans": 1,
+    "expAr": "",
+    "expEn": "When the Prophet's infant son Al-Qasim passed away, some Quraysh leaders mocked him as being 'cut off' (Abtar) from male heirs. Allah revealed Surah Al-Kawthar to comfort him, promising a river in Paradise and declaring that his mockers would be the forgotten ones.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا العطاءُ الوفيرُ والخيرُ العظيم، أنزلني الله بآياتٍ ثلاثٍ لتمسحَ الدمعةَ عن وجه الرسول وتبشره بنهرٍ في الفردوس. فمن أنا؟ (سورة الكوثر)",
+    "riddleEn": "I am the abundant gift and immense goodness; Allah revealed me in three verses to wipe away the Prophet's tears and promise him a sweet river in Paradise. What am I? (Surah Al-Kawthar)",
+    "riddleQuality": "human-crafted",
+    "variantOf": "quran-buraam-11"
+  },
+  {
+    "id": "prophets_companions-buraam-031",
+    "conceptId": "prophets_companions-buraam-031",
+    "cat": "prophets_companions",
+    "level": "buraam",
+    "difficulty": 1,
+    "ar": "ما هو الدعاء العظيم الذي ردده النبي يونس عليه السلام في بطن الحوت فنجاه الله؟",
+    "en": "What is the powerful supplication Prophet Yunus ﷺ repeated inside the whale's belly, by which Allah saved him?",
+    "opts": [
+      {
+        "ar": "{رَبِّ اغْفِرْ لِي وَهَبْ لِي مُلْكًا لَّا يَنبَغِي لِأَحَدٍ}",
+        "en": "'My Lord, forgive me and grant me a kingdom such as will not belong to anyone after me'"
+      },
+      {
+        "ar": "{رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً}",
+        "en": "'Our Lord, give us good in this world and good in the Hereafter'"
+      },
+      {
+        "ar": "{لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ}",
+        "en": "'There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers'"
+      },
+      {
+        "ar": "{رَبِّ ابْنِ لِي عِندَكَ بَيْتًا فِي الْجَنَّةِ}",
+        "en": "'My Lord, build for me near You a house in Paradise'"
+      }
+    ],
+    "ans": 2,
+    "expAr": "",
+    "expEn": "Inside the three darknesses — night, sea, and the whale's belly — Yunus ﷺ turned to Allah admitting his error. Allah answered his plea and commanded the whale to release him safely.",
+    "ref": "Blueprint upgrade",
+    "skill": "analysis",
+    "answerType": "concept",
+    "subcategory": "",
+    "sensitivity": "high",
+    "reviewStatus": "blueprint_human_reviewed",
+    "riddle": "أنا تسبيحةُ النجاةِ في ظلمات البحر الثلاث؛ رددني يونسُ بقلبٍ منكسرٍ فأمرَ اللهُ الحوتَ أن يُلقيه على الشاطئِ معافىً. فمن أنا؟ (لا إله إلا أنت سبحانك إني كنت من الظالمين)",
+    "riddleEn": "I am the supplication of safety in the three darknesses; Yunus repeated me with a broken heart until Allah commanded the whale to cast him safely upon the shore. What am I? ('There is no deity except You; exalted are You...')",
+    "riddleQuality": "human-crafted",
+    "variantOf": "prophets_companions-buraam-21"
   }
 ];
-
 </script>
 <script>
-(() => {
-  'use strict';
+    // Standardize global variable assignment to bridge original database setup with 720 array
+    window.QUESTIONS = window.WARATHA_QUESTIONS || [];
 
-  const QUESTIONS = window.WARATHA_QUESTIONS || [];
-  const RECENT_LIMIT = 120;
-  const STORE = 'waratha_v2_profile';
-  const RECENT = 'waratha_v2_recent';
-
-  const LEVELS = {
-    buraam:{ar:'براعم',en:'Young Learner',icon:'🌱',desc:'حقائق سهلة وبداية لطيفة',difficulty:1},
-    nashi:{ar:'ناشئ',en:'Junior',icon:'🌿',desc:'أساسيات مع فهم بسيط',difficulty:2},
-    mubtadi:{ar:'مبتدئ',en:'Beginner',icon:'📘',desc:'معرفة عامة منظمة',difficulty:3},
-    mutaallim:{ar:'متعلّم',en:'Learner',icon:'🪶',desc:'فهم وتطبيق',difficulty:4},
-    mutaqaddim:{ar:'متقدم',en:'Advanced',icon:'📚',desc:'مصطلحات ومصادر',difficulty:5},
-    mutamakkin:{ar:'متمكن',en:'Mastery',icon:'🕌',desc:'تحليل ومنهجية',difficulty:6}
-  };
-
-  const CATS = {
-    quran:              {ar:'القرآن الكريم',         en:'Quran',                    icon:'📖'},
-    hadith:             {ar:'الحديث الشريف',          en:'Hadith',                   icon:'📜'},
-    seerah:             {ar:'السيرة النبوية',         en:'Seerah',                   icon:'🕌'},
-    fiqh:               {ar:'الفقه والعبادات',        en:'Fiqh & Worship',           icon:'⚖️'},
-    prophets_companions:{ar:'الأنبياء والصحابة',      en:'Prophets & Companions',    icon:'🌟'},
-    hajj_umrah:         {ar:'الحج والعمرة',           en:'Hajj & Umrah',             icon:'🕋'},
-    random:             {ar:'اختيار عشوائي',          en:'Random Mix',               icon:'🎲'}
-  };
-
-  const MODES = {
-    daily:{ar:'التحدي اليومي',en:'Daily Challenge',count:5,timer:0},
-    quick:{ar:'اختبار سريع',en:'Quick Quiz',count:10,timer:0},
-    riddle:{ar:'لغز',en:'Riddle Mode',count:5,timer:25},
-    marathon:{ar:'المسابقة',en:'Marathon',count:40,timer:18}
-  };
-
-  const ST = {
-    mode:null,level:null,category:null,questions:[],currentQ:0,score:0,correct:0,wrong:0,lives:null,timer:null,timerLeft:0,lastPick:null
-  };
-
-  const $ = id => document.getElementById(id);
-  const arNum = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-  const load = () => { try { return JSON.parse(localStorage.getItem(STORE) || '{}'); } catch { return {}; } };
-  const save = patch => localStorage.setItem(STORE, JSON.stringify({ ...load(), ...patch }));
-  const loadRecent = () => { try { return JSON.parse(localStorage.getItem(RECENT) || '{"ids":[],"concepts":[]}'); } catch { return {ids:[],concepts:[]}; } };
-  const saveRecent = qs => {
-    const h = loadRecent();
-    const ids = [...qs.map(q => q.id), ...h.ids];
-    const concepts = [...qs.map(q => q.conceptId), ...h.concepts];
-    localStorage.setItem(RECENT, JSON.stringify({
-      ids:[...new Set(ids)].slice(0, RECENT_LIMIT),
-      concepts:[...new Set(concepts)].slice(0, RECENT_LIMIT)
-    }));
-  };
-
-  function hashSeed(text){ return [...text].reduce((a,c)=>((a<<5)-a)+c.charCodeAt(0),0) >>> 0; }
-  function shuffle(arr, seed=Math.random()*1e9){
-    let s = seed >>> 0;
-    const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
-    for(let i=arr.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
-    return arr;
-  }
-
-  function nav(screen){
-    clearTimer();
-    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-    const el = $('s-' + screen);
-    if(el) el.classList.add('active');
-    window.scrollTo(0,0);
-    if(screen === 'home') initHome();
-  }
-
-  function initHome(){
-    const d=load();
-    $('h-streak').textContent=d.streak || 0;
-    $('h-xp').textContent=(d.xp || 0).toLocaleString();
-    $('h-best').textContent=((d.best || 0) + '%');
-    $('bank-count').textContent = `${QUESTIONS.length.toLocaleString()} سؤال`;
-    $('daily-badge').hidden = d.dailyDone !== new Date().toDateString();
-  }
-
-  function renderLevels(){
-    const grid=$('level-grid'); grid.innerHTML='';
-    Object.entries(LEVELS).forEach(([key,l])=>{
-      const count=QUESTIONS.filter(q=>q.level===key).length;
-      const btn=document.createElement('button'); btn.className='card level-card';
-      btn.innerHTML=`<span>${l.icon}</span><strong>${l.ar}</strong><em>${l.en}</em><small>${arNum(count)} سؤال · ${count} questions</small><p>${l.desc}</p>`;
-      btn.addEventListener('click',()=>selectLevel(key)); grid.appendChild(btn);
-    });
-  }
-
-  function renderCategories(){
-    const grid=$('category-grid'); grid.innerHTML='';
-    Object.entries(CATS).forEach(([key,c])=>{
-      const count = key==='random'
-        ? QUESTIONS.filter(q=>q.level===ST.level).length
-        : QUESTIONS.filter(q=>q.level===ST.level && q.cat===key).length;
-      const btn=document.createElement('button'); btn.className='card cat-card'+(key==='random'?' random':'');
-      btn.innerHTML=`<span>${c.icon}</span><strong>${c.ar}</strong><em>${c.en}</em><small>${arNum(count)} سؤال في هذا المستوى</small>`;
-      btn.addEventListener('click',()=>selectCategory(key)); grid.appendChild(btn);
-    });
-  }
-
-  function pickQuestions({category, level, mode, count, seed=null}){
-    const history=loadRecent();
-    let pool=QUESTIONS.filter(q => q.level===level && (category==='random' || q.cat===category));
-    if(mode==='riddle') pool=pool.filter(q=>q.riddle);
-
-    const uniqueByConcept = list => {
-      const seen=new Set();
-      return list.filter(q=>{ if(seen.has(q.conceptId)) return false; seen.add(q.conceptId); return true; });
+    // Global App State Machine
+    const ST = {
+      mode: '',          // 'category', 'riddle', 'marathon'
+      level: '',         // 'buraam', 'nashi', 'mubtadi', etc.
+      category: '',      // 'quran', 'hadith', etc.
+      activeLang: 'ar',  // 'ar' or 'en'
+      pool: [],          // Active question list for session
+      index: 0,          // Current question index in game
+      correct: 0,        // Correct tally
+      wrong: 0,          // Incorrect tally
+      selectedIdx: null, // Track submitted option index
+      answered: false,   // Prevents double submissions
+      recentHistory: {
+        ids: [],
+        concepts: []
+      }
     };
 
-    let fresh=pool.filter(q=>!history.ids.includes(q.id) && !history.concepts.includes(q.conceptId));
-    if(fresh.length < count) fresh=pool.filter(q=>!history.concepts.includes(q.conceptId));
-    if(fresh.length < count) fresh=pool.filter(q=>!history.ids.includes(q.id));
-    if(fresh.length < count) fresh=pool;
+    // Unified Levels Definition
+    const LEVELS = [
+      { id: 'buraam', name: 'البراعم (Level 1)', code: 'Buraam' },
+      { id: 'nashi', name: 'الناشئة (Level 2)', code: 'Nashi' },
+      { id: 'mubtadi', name: 'المبتدئ (Level 3)', code: 'Mubtadi' },
+      { id: 'mutaallim', name: 'المتعلم (Level 4)', code: 'Mutaallim' },
+      { id: 'mutaqaddim', name: 'المتقدم (Level 5)', code: 'Mutaqaddim' },
+      { id: 'mutamakkin', name: 'المتمكن (Level 6)', code: 'Mutamakkin' }
+    ];
 
-    const selected=uniqueByConcept(shuffle([...fresh], seed ?? hashSeed(Date.now()+category+level+mode))).slice(0,count);
-    return {selected, poolSize: pool.length, freshSize: fresh.length};
-  }
+    const $ = id => document.getElementById(id);
 
-  function selectMode(mode){
-    ST.mode=mode;
-    ST.category=null;
-    if(mode==='daily') return launchDaily();
-    nav('level');
-  }
-
-  function selectLevel(level){
-    ST.level=level;
-    document.body.className = level==='buraam' ? 'kids' : '';
-    if(ST.mode==='marathon') return launchMarathon();
-    renderCategories(); nav('category');
-  }
-
-  function selectCategory(category){
-    ST.category=category;
-    const mode=MODES[ST.mode];
-    const pick=pickQuestions({category, level:ST.level, mode:ST.mode, count:mode.count});
-    if(!pick.selected.length){ return showNoQuestions(); }
-    ST.lastPick={category,level:ST.level,mode:ST.mode};
-    beginQuiz(pick.selected);
-  }
-
-  function launchDaily(){
-    const d=load(); const today=new Date().toDateString();
-    if(d.dailyDone===today){
-      ST.mode='daily'; ST.level='mubtadi';
-      const seed=hashSeed(today+'daily-replay');
-      const pick=makeDaily(seed);
-      beginQuiz(pick, {practice:true});
-      return;
+    // View Switching Router
+    function nav(viewId) {
+      document.querySelectorAll('.view').forEach(v => v.classList.add('hide'));
+      $('view-' + viewId).classList.remove('hide');
     }
-    ST.level='mubtadi'; ST.category='random';
-    beginQuiz(makeDaily(hashSeed(today)), {daily:true});
-  }
 
-  function makeDaily(seed){
-    const cats=shuffle(Object.keys(CATS).filter(c=>c!=='random'), seed);
-    const selected=[];
-    cats.forEach((cat,i)=>{
-      if(selected.length>=5) return;
-      const pick=pickQuestions({category:cat,level:'mubtadi',mode:'daily',count:1,seed:seed+i});
-      if(pick.selected[0]) selected.push(pick.selected[0]);
-    });
-    return selected;
-  }
-
-  function launchMarathon(){
-    ST.category='random'; ST.lives=3;
-    const pick=pickQuestions({category:'random',level:ST.level,mode:'marathon',count:MODES.marathon.count});
-    ST.lastPick={category:'random',level:ST.level,mode:'marathon'};
-    beginQuiz(pick.selected);
-  }
-
-  function showNoQuestions(){
-    alert('لا توجد أسئلة كافية لهذا الاختيار حالياً. جرّب باباً آخر أو مستوى آخر.');
-  }
-
-  function beginQuiz(qs, flags={}){
-    ST.questions=qs; ST.currentQ=0; ST.score=0; ST.correct=0; ST.wrong=0; ST.practice=!!flags.practice; ST.daily=!!flags.daily;
-    if(ST.mode!=='marathon') ST.lives=null;
-    saveRecent(qs);
-    nav('quiz'); renderQuestion();
-  }
-
-  function renderQuestion(){
-    clearTimer();
-    const q=ST.questions[ST.currentQ];
-    if(!q) return showResult();
-    const mode=MODES[ST.mode]; const lv=LEVELS[q.level]; const cat=CATS[q.cat];
-    $('qz-mode-ar').textContent=mode.ar; $('qz-mode-en').textContent=mode.en;
-    $('qz-score').textContent=ST.score.toLocaleString();
-    $('qz-progress').style.width=`${(ST.currentQ/ST.questions.length)*100}%`;
-    renderDots();
-    $('qz-cat').textContent=`${cat.icon} ${cat.ar} · ${cat.en}`;
-    $('qz-level').textContent=`${lv.ar} · ${lv.en}`;
-    $('qz-lives').textContent=ST.mode==='marathon' ? '❤️'.repeat(ST.lives)+'🖤'.repeat(3-ST.lives) : '';
-    $('qz-num').textContent=`${ST.currentQ+1} of ${ST.questions.length} · ${arNum(ST.currentQ+1)} / ${arNum(ST.questions.length)}`;
-
-    const isRiddle=ST.mode==='riddle' && q.riddle;
-    $('qz-riddle').hidden=!isRiddle; $('qz-riddle').textContent=isRiddle ? q.riddle : '';
-    $('qz-ar').textContent=isRiddle ? 'ما الإجابة؟' : q.ar;
-    $('qz-en').textContent=isRiddle ? (q.riddleEn || 'What is the answer?') : q.en;
-    $('qz-explain').hidden=true; $('qz-reveal').hidden=true; $('qz-next').hidden=true;
-    renderOptions(q);
-    if(mode.timer) startTimer(mode.timer);
-  }
-
-  function renderDots(){
-    const dots=$('qz-dots'); dots.innerHTML='';
-    const visible=Math.min(ST.questions.length,14);
-    for(let i=0;i<visible;i++){
-      const dot=document.createElement('i');
-      dot.className=i<ST.currentQ?'done':i===ST.currentQ?'now':'';
-      dots.appendChild(dot);
+    // Concept Family Lookup helper for Deduplication Engine
+    function getConceptKey(q) {
+      return q.conceptFamily || q.conceptId || q.id;
     }
-  }
 
-  function renderOptions(q){
-    const box=$('qz-options'); box.innerHTML='';
-    const opts=shuffle(q.opts.map((o,i)=>({...o,correct:i===q.ans})), hashSeed(q.id+'-'+ST.currentQ));
-    opts.forEach(opt=>{
-      const btn=document.createElement('button'); btn.className='option';
-      const ar=document.createElement('strong'); ar.textContent=opt.ar;
-      const en=document.createElement('small'); en.textContent=opt.en;
-      btn.append(ar,en);
-      btn.addEventListener('click',()=>answer(btn,opt.correct,q));
-      box.appendChild(btn);
-    });
-  }
-
-  function answer(btn,isCorrect,q){
-    clearTimer();
-    document.querySelectorAll('.option').forEach(b=>{
-      b.disabled=true;
-      const text=b.querySelector('strong')?.textContent;
-      const correctAr=q.opts[q.ans].ar;
-      if(text===correctAr) b.classList.add('correct');
-    });
-    if(isCorrect){
-      btn.classList.add('correct'); ST.correct++; ST.score += scoreFor(q);
-    } else {
-      btn.classList.add('wrong'); ST.wrong++;
-      if(ST.mode==='marathon') ST.lives=Math.max(0,ST.lives-1);
-    }
-    $('qz-score').textContent=ST.score.toLocaleString();
-    showExplain(q, ST.mode==='marathon' && ST.lives===0);
-  }
-
-  function scoreFor(q){
-    const base = 10 + q.difficulty*3;
-    return ST.mode==='marathon' ? base+5 : ST.mode==='riddle' ? base+4 : base;
-  }
-
-  function showExplain(q, forceEnd=false){
-    const exp=$('qz-explain'); exp.hidden=false;
-    if(ST.mode==='riddle'){
-      $('qz-reveal').hidden=false;
-      $('qz-reveal').textContent=`السؤال: ${q.ar} · ${q.en}`;
-    }
-    $('qz-exp-ar').textContent=q.expAr || '';
-    $('qz-exp-en').textContent=q.expEn || '';
-    $('qz-ref').textContent=q.ref ? `📚 ${q.ref}` : '';
-    const last = ST.currentQ >= ST.questions.length-1 || forceEnd;
-    const next=$('qz-next'); next.hidden=false; next.textContent=last ? 'النتائج · Results ←' : 'التالي · Next ←';
-    next.onclick = last ? showResult : nextQuestion;
-  }
-
-  function nextQuestion(){ ST.currentQ++; renderQuestion(); }
-
-  function startTimer(sec){
-    ST.timerLeft=sec; $('qz-timer').style.width='100%';
-    ST.timer=setInterval(()=>{
-      ST.timerLeft--;
-      $('qz-timer').style.width=`${Math.max(0,(ST.timerLeft/sec)*100)}%`;
-      if(ST.timerLeft<=0){
-        clearTimer();
-        const first=[...document.querySelectorAll('.option')].find(b=>!b.disabled);
-        if(first) answer(first,false,ST.questions[ST.currentQ]);
+    // Local Storage Progress Management
+    function loadHistory() {
+      try {
+        const stored = localStorage.getItem('waratha_recent');
+        if (stored) {
+          ST.recentHistory = JSON.parse(stored);
+        } else {
+          ST.recentHistory = { ids: [], concepts: [] };
+        }
+      } catch (err) {
+        ST.recentHistory = { ids: [], concepts: [] };
       }
-    },1000);
-  }
-  function clearTimer(){ if(ST.timer){ clearInterval(ST.timer); ST.timer=null; } const t=$('qz-timer'); if(t) t.style.width='0%'; }
-
-  function showResult(){
-    clearTimer();
-    const total=ST.questions.length || 1;
-    const pct=Math.round((ST.correct/total)*100);
-    const d=load();
-    const today=new Date().toDateString();
-    const wasDailyDone=d.dailyDone===today;
-    let patch={};
-    if(!ST.practice){
-      const xp=(d.xp||0)+ST.score;
-      const games=(d.games||0)+1;
-      let streak=d.streak||0, bestStreak=d.bestStreak||0;
-      if(ST.daily && !wasDailyDone){ streak+=1; bestStreak=Math.max(bestStreak,streak); patch.dailyDone=today; }
-      patch={xp,games,best:Math.max(d.best||0,pct),streak,bestStreak};
-      save(patch);
+      updateStreakAndXP();
     }
-    $('result-score').textContent=pct+'%';
-    $('result-emoji').textContent=pct>=90?'🏆':pct>=70?'🌟':pct>=45?'📘':'🌱';
-    $('result-label').textContent=pct>=90?'ممتاز جداً':pct>=70?'نتيجة جميلة':pct>=45?'جيد، واصل التعلم':'بداية طيبة، أعد المحاولة';
-    $('r-correct').textContent=ST.correct; $('r-wrong').textContent=ST.wrong; $('r-xp').textContent=ST.practice ? 'Practice' : ST.score;
-    $('qz-progress').style.width='100%';
-    nav('result');
-  }
 
-  function replay(){
-    if(!ST.lastPick){ nav('home'); return; }
-    ST.mode=ST.lastPick.mode; ST.level=ST.lastPick.level; ST.category=ST.lastPick.category;
-    if(ST.mode==='marathon') return launchMarathon();
-    selectCategory(ST.category);
-  }
+    function saveHistory(id, concept) {
+      ST.recentHistory.ids.unshift(id);
+      ST.recentHistory.concepts.unshift(concept);
 
-  function init(){
-    renderLevels(); initHome();
-    document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>selectMode(b.dataset.mode)));
-    document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.nav)));
-    $('play-again').addEventListener('click',replay);
-    if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
-    console.log(`Waratha v3 loaded: ${QUESTIONS.length} questions`);
-  }
-  document.addEventListener('DOMContentLoaded',init);
-})();
+      // Clamp recent history size to prevent absolute lockouts in small subcategories
+      if (ST.recentHistory.ids.length > 20) {
+        ST.recentHistory.ids.pop();
+        ST.recentHistory.concepts.pop();
+      }
 
+      localStorage.setItem('waratha_recent', JSON.stringify(ST.recentHistory));
+      
+      // Update XP Points
+      let xp = parseInt(localStorage.getItem('waratha_xp') || '0');
+      xp += 10;
+      localStorage.setItem('waratha_xp', xp.toString());
+
+      updateStreakAndXP();
+    }
+
+    function updateStreakAndXP() {
+      const xp = localStorage.getItem('waratha_xp') || '0';
+      $('xp-points').innerText = xp;
+      
+      const streak = localStorage.getItem('waratha_streak') || '0';
+      $('streak-count').innerText = streak;
+    }
+
+    // Dynamic Level Elements Compiler
+    function renderLevels() {
+      const container = $('level-list-container');
+      container.innerHTML = '';
+      
+      LEVELS.forEach(lvl => {
+        container.innerHTML += `
+          <button onclick="selectLevel('${lvl.id}')" class="w-full p-4.5 bg-white border border-slate-200 rounded-2xl text-right flex items-center justify-between hover:border-emerald-600/30 transition-all">
+            <div class="flex items-center gap-3">
+              <div class="h-9 w-9 bg-emerald-500/10 text-emerald-800 font-bold text-xs rounded-lg flex items-center justify-center uppercase">
+                ${lvl.id.slice(0, 3)}
+              </div>
+              <span class="text-xs font-extrabold text-slate-800">${lvl.name}</span>
+            </div>
+            <i class="fa-solid fa-chevron-left text-slate-400 text-xs"></i>
+          </button>
+        `;
+      });
+    }
+
+    function goBackToLevel() {
+      if (ST.mode === 'category') nav('level');
+      else nav('home');
+    }
+
+    // Game Mode Initiation Router
+    function selectMode(mode) {
+      ST.mode = mode;
+      if (mode === 'category') {
+        nav('level');
+      } else if (mode === 'riddle') {
+        launchRiddleMode();
+      } else if (mode === 'marathon') {
+        launchMarathon();
+      }
+    }
+
+    function selectLevel(level) {
+      ST.level = level;
+      nav('category');
+    }
+
+    // 1. Core Category Quiz Game Loop Launcher
+    function selectCategory(cat) {
+      ST.category = cat;
+      ST.index = 0;
+      ST.correct = 0;
+      ST.wrong = 0;
+      ST.activeLang = 'ar';
+
+      // Load matching questions
+      const available = window.QUESTIONS.filter(q => 
+        q.cat === ST.category && 
+        q.level === ST.level
+      );
+
+      // Apply the concept-family deduplication patch
+      let freshPool = available.filter(q => 
+        !ST.recentHistory.ids.includes(q.id) &&
+        !ST.recentHistory.concepts.includes(getConceptKey(q))
+      );
+
+      // Fallback: If deduplication empties the pool, bypass to ensure active play
+      if (freshPool.length === 0) {
+        freshPool = available;
+      }
+
+      // Slice out a 10-question deck
+      ST.pool = freshPool.sort(() => 0.5 - Math.random()).slice(0, 10);
+      
+      if (ST.pool.length === 0) {
+        alert("لا توجد أسئلة متوفرة في هذا القسم حالياً.");
+        nav('home');
+        return;
+      }
+
+      $('quiz-title-display').innerText = getCategoryName(cat);
+      nav('quiz');
+      renderQuestion();
+    }
+
+    // 2. Launch Riddle Mode Loop
+    function launchRiddleMode() {
+      ST.index = 0;
+      ST.correct = 0;
+      ST.wrong = 0;
+
+      // Filter pool to valid human-crafted riddles (eliminates blank variant-B placeholders)
+      const rawPool = window.QUESTIONS.filter(q => 
+        q.riddle && 
+        q.riddle.trim() !== "" && 
+        q.riddleQuality !== "not_applicable_variant"
+      );
+
+      ST.pool = rawPool.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+      if (ST.pool.length === 0) {
+        alert("لا توجد ألغاز متوفرة حالياً.");
+        nav('home');
+        return;
+      }
+
+      nav('riddle');
+      renderRiddle();
+    }
+
+    // 3. Launch Marathon Loop
+    function launchMarathon() {
+      ST.index = 0;
+      ST.correct = 0;
+      ST.wrong = 0;
+      ST.activeLang = 'ar';
+
+      ST.pool = window.QUESTIONS.sort(() => 0.5 - Math.random()).slice(0, 50);
+
+      $('quiz-title-display').innerText = "ماراثون البقاء";
+      nav('quiz');
+      renderQuestion();
+    }
+
+    // Main Renderer: Standard MCQ Layout
+    function renderQuestion() {
+      ST.answered = false;
+      ST.selectedIdx = null;
+
+      const q = ST.pool[ST.index];
+      const countDisplay = ST.mode === 'marathon' ? `السؤال ${ST.index + 1}` : `السؤال ${ST.index + 1} / 10`;
+      
+      $('quiz-count-display').innerText = countDisplay;
+      $('q-id-display').innerText = q.id;
+      $('q-skill-display').innerText = q.skill ? q.skill.toUpperCase() : "استذكار وحفظ";
+
+      // Calculate progress width
+      const pct = ST.mode === 'marathon' ? ((ST.index) / ST.pool.length) * 100 : ((ST.index) / 10) * 100;
+      $('qz-progress').style.width = pct + '%';
+
+      $('exp-block').classList.add('hidden');
+      $('next-btn').setAttribute('disabled', 'true');
+
+      // Unpack prompts, dynamic text direction alignments, and fonts
+      const prompt = ST.activeLang === 'en' && q.en ? q.en : q.ar;
+      const textBody = $('q-text-body');
+      textBody.innerText = prompt;
+
+      const textContainer = $('q-text-container');
+      if (ST.activeLang === 'en' && q.en) {
+        textContainer.className = "text-left-align";
+        textBody.classList.remove('arabic-font');
+        $('lang-toggle-btn').classList.add('bg-emerald-500/10');
+      } else {
+        textContainer.className = "text-right-align";
+        textBody.classList.add('arabic-font');
+        $('lang-toggle-btn').classList.remove('bg-emerald-500/10');
+      }
+
+      // Language Switch Guard: hide translation button if English prompt is unavailable
+      if (!q.en) {
+        $('lang-toggle-btn').classList.add('hide');
+      } else {
+        $('lang-toggle-btn').classList.remove('hide');
+      }
+
+      // Render Options
+      const grid = $('options-grid');
+      grid.innerHTML = '';
+
+      q.opts.forEach((opt, i) => {
+        const optionText = ST.activeLang === 'en' && opt.en ? opt.en : opt.ar;
+        const alignClass = ST.activeLang === 'en' && opt.en ? 'text-left-align' : 'text-right-align arabic-font';
+
+        grid.innerHTML += `
+          <button onclick="selectOption(${i})" id="opt-${i}" class="option-card ${alignClass}">
+            ${optionText}
+          </button>
+        `;
+      });
+    }
+
+    function toggleLanguage() {
+      if (ST.answered) return; // Freeze language toggle once answer is locked
+      ST.activeLang = ST.activeLang === 'ar' ? 'en' : 'ar';
+      renderQuestion();
+    }
+
+    function selectOption(index) {
+      if (ST.answered) return;
+
+      ST.selectedIdx = index;
+      document.querySelectorAll('#options-grid .option-card').forEach((card, i) => {
+        if (i === index) {
+          card.style.borderColor = 'var(--g)';
+          card.style.backgroundColor = 'rgba(27,67,50,0.04)';
+        } else {
+          card.style.borderColor = 'var(--bdr)';
+          card.style.backgroundColor = 'var(--white)';
+        }
+      });
+
+      $('next-btn').removeAttribute('disabled');
+    }
+
+    // Submit Answer & Handle Exposition Layout
+    function nextQuestion() {
+      const q = ST.pool[ST.index];
+
+      if (!ST.answered) {
+        ST.answered = true;
+        const isCorrect = ST.selectedIdx === q.ans;
+
+        if (isCorrect) {
+          ST.correct++;
+          document.getElementById(`opt-${ST.selectedIdx}`).classList.add('correct');
+          saveHistory(q.id, getConceptKey(q));
+        } else {
+          ST.wrong++;
+          document.getElementById(`opt-${ST.selectedIdx}`).classList.add('incorrect');
+          document.getElementById(`opt-${q.ans}`).classList.add('correct');
+        }
+
+        // Setup Exposition container text translation and text alignments
+        const expText = ST.activeLang === 'en' && q.expEn ? q.expEn : q.expAr;
+        $('exp-text-body').innerText = expText;
+        $('exp-ref-body').innerText = `المصدر المرجعي: ${q.ref || 'غير محدد'}`;
+
+        const expContainer = $('exp-text-container');
+        if (ST.activeLang === 'en' && q.expEn) {
+          expContainer.className = "text-left-align";
+        } else {
+          expContainer.className = "text-right-align";
+        }
+
+        $('exp-block').classList.remove('hidden');
+        $('next-btn').innerHTML = `الانتقال للتالي <i class="fa-solid fa-chevron-left text-xs"></i>`;
+      } else {
+        ST.index++;
+        if (ST.index >= ST.pool.length || (ST.mode === 'category' && ST.index >= 10)) {
+          showResults();
+        } else {
+          $('next-btn').innerHTML = `أكد الإجابة ومواصلة <i class="fa-solid fa-chevron-left text-xs"></i>`;
+          renderQuestion();
+        }
+      }
+    }
+
+    // Riddle gameplay loop renderer
+    function renderRiddle() {
+      ST.answered = false;
+      ST.selectedIdx = null;
+
+      const q = ST.pool[ST.index];
+      $('riddle-text').innerText = q.riddle;
+      $('riddle-text-en').innerText = q.riddleEn || "";
+      $('riddle-next-btn').setAttribute('disabled', 'true');
+
+      const optionsContainer = $('riddle-options');
+      optionsContainer.innerHTML = '';
+
+      q.opts.forEach((opt, i) => {
+        optionsContainer.innerHTML += `
+          <button onclick="selectRiddleOption(${i})" id="riddle-opt-${i}" class="option-card text-right arabic-font">
+            ${opt.ar}
+          </button>
+        `;
+      });
+    }
+
+    function selectRiddleOption(index) {
+      if (ST.answered) return;
+
+      ST.selectedIdx = index;
+      document.querySelectorAll('#riddle-options .option-card').forEach((card, i) => {
+        if (i === index) {
+          card.style.borderColor = 'var(--g)';
+          card.style.backgroundColor = 'rgba(27,67,50,0.04)';
+        } else {
+          card.style.borderColor = 'var(--bdr)';
+          card.style.backgroundColor = 'var(--white)';
+        }
+      });
+
+      $('riddle-next-btn').removeAttribute('disabled');
+    }
+
+    function nextRiddle() {
+      const q = ST.pool[ST.index];
+
+      if (!ST.answered) {
+        ST.answered = true;
+        const isCorrect = ST.selectedIdx === q.ans;
+
+        if (isCorrect) {
+          ST.correct++;
+          document.getElementById(`riddle-opt-${ST.selectedIdx}`).classList.add('correct');
+          saveHistory(q.id, getConceptKey(q));
+        } else {
+          ST.wrong++;
+          document.getElementById(`riddle-opt-${ST.selectedIdx}`).classList.add('incorrect');
+          document.getElementById(`riddle-opt-${q.ans}`).classList.add('correct');
+        }
+
+        $('riddle-next-btn').innerHTML = `مواصلة <i class="fa-solid fa-chevron-left text-xs"></i>`;
+      } else {
+        ST.index++;
+        if (ST.index >= ST.pool.length) {
+          showResults();
+        } else {
+          $('riddle-next-btn').innerHTML = `التحقق والانتقال <i class="fa-solid fa-chevron-left text-xs"></i>`;
+          renderRiddle();
+        }
+      }
+    }
+
+    // Compile & render results layout
+    function showResults() {
+      const total = ST.index;
+      const pct = total > 0 ? Math.round((ST.correct / total) * 100) : 0;
+
+      $('result-score').innerText = pct + '%';
+      $('r-correct').innerText = ST.correct;
+      $('r-wrong').innerText = ST.wrong;
+      $('r-xp').innerText = ST.mode === 'marathon' ? 'ماراثون' : ST.mode === 'riddle' ? 'فوازير' : 'تصنيفات';
+
+      $('result-emoji').innerText = pct >= 90 ? '🏆' : pct >= 70 ? '🌟' : pct >= 45 ? '📘' : '🌱';
+      $('result-label').innerText = pct >= 90 ? 'ممتاز جداً ونفع الله بك' : pct >= 70 ? 'أداء رائع، استمر' : pct >= 45 ? 'جيد، واصل التزود بالمعرفة' : 'بداية مباركة، أعد المحاولة لتستفيد';
+
+      // Increment daily streak on successful completion threshold
+      if (pct >= 70) {
+        let streak = parseInt(localStorage.getItem('waratha_streak') || '0');
+        streak += 1;
+        localStorage.setItem('waratha_streak', streak.toString());
+        updateStreakAndXP();
+      }
+
+      nav('result');
+    }
+
+    function replay() {
+      if (ST.mode === 'marathon') launchMarathon();
+      else if (ST.mode === 'riddle') launchRiddleMode();
+      else selectCategory(ST.category);
+    }
+
+    function exitActiveSession() {
+      if (confirm("هل تريد مغادرة هذا الاختبار والعودة للقائمة الرئيسية؟")) {
+        nav('home');
+      }
+    }
+
+    function getCategoryName(cat) {
+      const map = {
+        quran: "القرآن وعلومه",
+        hadith: "الحديث الشريف",
+        seerah: "السيرة النبوية",
+        fiqh: "الفقه وأصوله",
+        prophets_companions: "الأنبياء والصحابة",
+        hajj_umrah: "الحج والعمرة"
+      };
+      return map[cat] || cat;
+    }
+
+    // App initialization bootstrapping
+    window.onload = function() {
+      loadHistory();
+      renderLevels();
+    }
+  
+// Override CATS and LEVELS to match question bank schema
+if(typeof CATS !== 'undefined') {
+  CATS.prophets_companions = CATS.prophets_companions || CATS.prophets || {ar:'الأنبياء والصحابة',en:'Prophets & Companions',icon:'🌟'};
+  CATS.hajj_umrah = CATS.hajj_umrah || CATS.hajj || {ar:'الحج والعمرة',en:'Hajj & Umrah',icon:'🕋'};
+  delete CATS.prophets; delete CATS.hajj;
+}
 </script>
 </body>
 </html>
+
+```
