@@ -1,6 +1,6 @@
 // Waratha service worker
 // Bump CACHE_VERSION whenever index.html or other assets change.
-const CACHE_VERSION = 'waratha-v4-2026-10-14';
+const CACHE_VERSION = 'waratha-v5-2026-10-14';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', event => {
