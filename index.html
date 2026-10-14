@@ -31,6 +31,8 @@ button{font:inherit;border:0;cursor:pointer}button:active{transform:scale(.985)}
 body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.kids .option strong{font-size:1.08rem}
 @media (min-width:430px){.mode-grid{grid-template-columns:1fr 1fr}.mode-card{min-height:122px;align-content:center}.mode-card em{grid-column:1/-1}.mode-card b{grid-column:1/-1}.level-grid,.category-grid{gap:12px}}
 
+
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -350,6 +352,7 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
     $('qz-cat').textContent=`${cat.icon} ${cat.ar} · ${cat.en}`;
     $('qz-level').textContent=`${lv.ar} · ${lv.en}`;
     $('qz-lives').textContent=ST.mode==='marathon' ? '❤️'.repeat(ST.lives)+'🖤'.repeat(3-ST.lives) : '';
+    $('qz-lives').hidden=ST.mode!=='marathon';
     $('qz-num').textContent=`${ST.currentQ+1} of ${ST.questions.length} · ${arNum(ST.currentQ+1)} / ${arNum(ST.questions.length)}`;
 
     const isRiddle=ST.mode==='riddle' && q.riddle;
