@@ -1,6 +1,6 @@
 // Waratha service worker
 // Bump CACHE_VERSION whenever index.html or other assets change.
-const CACHE_VERSION = 'waratha-v6-2026-10-14';
+const CACHE_VERSION = 'waratha-v7-2026-10-19';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', event => {
@@ -16,6 +16,15 @@ self.addEventListener('activate', event => {
   );
 });
 
+// The app shell is the root or index.html; any other page on this origin
+// (an older build left in place, an error page) must not overwrite it.
+function isShell(url) {
+  try {
+    const p = new URL(url).pathname;
+    return p.endsWith('/') || p.endsWith('/index.html');
+  } catch (e) { return false; }
+}
+
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -25,23 +34,40 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       fetch(req)
         .then(res => {
-          const copy = res.clone();
-          caches.open(CACHE_VERSION).then(c => c.put('./index.html', copy));
+          // Only a healthy response for the app shell itself may become the
+          // offline copy. Without this an error page, a captive-portal login
+          // page, or another page served from this origin replaces the app.
+          if (res.ok && isShell(req.url)) {
+            const copy = res.clone();
+            event.waitUntil(
+              caches.open(CACHE_VERSION).then(c => c.put('./index.html', copy)).catch(() => {})
+            );
+          }
           return res;
         })
-        .catch(() => caches.match('./index.html'))
+        .catch(() => caches.match('./index.html')
+          .then(hit => hit || caches.match('./'))
+          .then(hit => hit || new Response(
+            '<!doctype html><meta charset="utf-8"><title>Offline</title>' +
+            '<p style="font:16px system-ui;padding:24px">Offline — reopen once you have a connection.</p>',
+            { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } })))
     );
     return;
   }
 
-  // Everything else (icons, Google Fonts): cache first, then network, and keep a copy.
+  // Everything else (icons, fonts): cache first, then network, and keep a copy.
+  // Opaque responses are deliberately not cached: their status is always 0, so
+  // a captive portal's reply is indistinguishable from the real file and would
+  // be served from the cache for good.
   event.respondWith(
     caches.match(req).then(hit => hit || fetch(req).then(res => {
-      if (res.ok || res.type === 'opaque') {
+      if (res.ok) {
         const copy = res.clone();
-        caches.open(CACHE_VERSION).then(c => c.put(req, copy));
+        event.waitUntil(
+          caches.open(CACHE_VERSION).then(c => c.put(req, copy)).catch(() => {})
+        );
       }
       return res;
-    }))
+    }).catch(() => caches.match(req).then(h => h || Response.error())))
   );
 });
