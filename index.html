@@ -39,6 +39,7 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
   <main>
     <section id="s-home" class="screen active" aria-labelledby="home-title">
       <header class="hero">
+        <button type="button" id="tourBtn" onclick="SabilTour.start()" aria-label="جولة في التطبيق · App tour" style="position:absolute;top:12px;inset-inline-end:12px;z-index:2;width:40px;height:40px;border-radius:99px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:inherit;font:inherit;font-size:18px;font-weight:700;cursor:pointer">؟</button>
         <div class="brand-mark">و</div>
         <p class="eyebrow">Sabil Islamic Hub</p>
         <h1 id="home-title">ورثة</h1>
@@ -508,5 +509,182 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
   document.addEventListener('DOMContentLoaded',init);
 })();
 </script>
+<!-- sabil-tour:start -->
+<script>
+/* Sabil apps — shared first-run tour (spotlight + card), v1.
+   Usage: SabilTour.init({ key, lang(), dark(), steps, appName, ready(), mount(), onClose() })
+   step: { sel, h:{ar,en}, p:{ar,en}, before() } — a step without sel is a centred card;
+   the install / share card is added at the end automatically. */
+(function () {
+  'use strict';
+  var C = null, open = false, idx = 0, els = null, steps = [], lastFocus = null, bip = null, placeT = 0;
+  window.addEventListener('beforeinstallprompt', function (e) { bip = e; });
+  var SHARE = '<svg class="st-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
+  var W = {
+    ar: { next: 'التالي', back: 'السابق', done: 'ابدأ', close: 'إغلاق الجولة', install: 'تثبيت', share: 'مشاركة', tour: 'جولة في التطبيق',
+      inst: { h: 'انتهت الجولة', p: '{a} مثبّت على جهازك. نسأل الله أن ينفعك به، ولا تنسَ مشاركته مع أهلك وأصدقائك.' },
+      ios: { h: 'أضِفه إلى شاشتك الرئيسية', p: 'في Safari اضغط زر المشاركة ' + SHARE + ' ثم «إضافة إلى الشاشة الرئيسية»، ليفتح {a} كتطبيق بضغطة واحدة.' },
+      prompt: { h: 'ثبّت {a} على جهازك', p: 'اضغط «تثبيت» ليظهر {a} بين تطبيقاتك ويفتح بضغطة واحدة.' },
+      other: { h: 'أضِفه إلى شاشتك الرئيسية', p: 'من قائمة المتصفح اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية»، ليفتح {a} كتطبيق بضغطة واحدة.' } },
+    en: { next: 'Next', back: 'Back', done: 'Start', close: 'Close the tour', install: 'Install', share: 'Share', tour: 'App tour',
+      inst: { h: "That's the tour", p: '{a} is installed on your device. May Allah make it of benefit — and do share it with family and friends.' },
+      ios: { h: 'Add it to your home screen', p: 'In Safari tap the Share button ' + SHARE + ' then “Add to Home Screen”, and {a} opens like an app with one tap.' },
+      prompt: { h: 'Install {a}', p: 'Tap Install and {a} sits with your apps, one tap away.' },
+      other: { h: 'Add it to your home screen', p: 'In your browser menu choose “Install app” or “Add to Home Screen”, and {a} opens like an app with one tap.' } }
+  };
+  var CSS = '.st-catch{position:fixed;inset:0;z-index:2147483000;background:transparent}' +
+    '.st-hole{position:fixed;z-index:2147483001;border-radius:20px;box-shadow:0 0 0 9999px rgba(10,16,12,.64);outline:2px solid rgba(212,173,101,.95);pointer-events:none;transition:left .3s ease,top .3s ease,width .3s ease,height .3s ease}' +
+    '.st-hole.none{left:50%!important;top:40%!important;width:0!important;height:0!important;outline:0}' +
+    '.st-card{position:fixed;z-index:2147483002;width:min(340px,calc(100vw - 32px));box-sizing:border-box;background:#fffaf0;color:#17201b;border-radius:22px;padding:18px 18px 14px;box-shadow:0 24px 60px rgba(0,0,0,.35);transition:left .3s ease,top .3s ease;text-align:start;line-height:normal;letter-spacing:normal}' +
+    '.st-card.dark{background:#1f2a24;color:#ede7d8}' +
+    '.st-card h2{margin:0 36px 6px 0;font-family:Amiri,Georgia,serif;font-size:23px;font-weight:700;line-height:1.3;color:inherit}' +
+    '.st-card[dir="rtl"] h2{margin:0 0 6px 36px}' +
+    '.st-card p{margin:0;font-size:15px;line-height:1.65;opacity:.88;color:inherit}' +
+    '.st-card .st-ico{display:inline-block;vertical-align:-3px;margin:0 2px}' +
+    '.st-foot{display:flex;align-items:center;gap:8px;margin-top:16px}' +
+    '.st-dots{display:flex;gap:5px;flex:1;flex-wrap:wrap}' +
+    '.st-dots i{width:7px;height:7px;border-radius:99px;background:rgba(120,120,110,.35);display:block}' +
+    '.st-dots i.on{width:18px;background:#c6a15b}' +
+    '.st-btn{min-height:44px;padding:0 16px;border-radius:14px;border:0;font:inherit;font-size:15px;font-weight:700;cursor:pointer;flex:none}' +
+    '.st-next{background:#1f2a24;color:#fffaf0}.st-card.dark .st-next{background:#d4ad65;color:#1f2a24}' +
+    '.st-ghost{background:transparent;color:inherit;opacity:.78;padding:0 10px}' +
+    '.st-x{position:absolute;top:8px;inset-inline-end:8px;width:40px;height:40px;border:0;border-radius:99px;background:transparent;color:inherit;opacity:.6;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}' +
+    '.st-btn:focus-visible,.st-x:focus-visible{outline:2px solid #c6a15b;outline-offset:2px}' +
+    '@media (prefers-reduced-motion:reduce){.st-hole,.st-card{transition:none}}';
+  function lang() { var l = C && C.lang ? C.lang() : 'ar'; return l === 'en' ? 'en' : 'ar'; }
+  function tx(o) { return o == null ? '' : typeof o === 'string' ? o : (o[lang()] != null ? o[lang()] : o.ar); }
+  function reduced() { return !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  function visible(el) { if (!el || el.hidden) return false; var r = el.getClientRects(); if (!r.length) return false; var cs = getComputedStyle(el); return cs.visibility !== 'hidden' && cs.display !== 'none' && parseFloat(cs.opacity || '1') > 0.05; }
+  function installed() { return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; }
+  function isIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); }
+  function endCard() {
+    var w = W[lang()], a = tx(C.appName), k = installed() ? 'inst' : bip ? 'prompt' : isIOS() ? 'ios' : 'other';
+    return { k: k, h: w[k].h.replace(/\{a\}/g, a), p: w[k].p.replace(/\{a\}/g, a) };
+  }
+  function find(st) { if (!st.sel) return null; var list = document.querySelectorAll(st.sel); for (var i = 0; i < list.length; i++) if (visible(list[i])) return list[i]; return null; }
+  function start() {
+    if (open || !C) return;
+    open = true; idx = 0; lastFocus = document.activeElement;
+    if (!document.getElementById('st-css')) { var s = document.createElement('style'); s.id = 'st-css'; s.textContent = CSS; document.head.appendChild(s); }
+    var c = document.createElement('div'); c.className = 'st-catch';
+    var h = document.createElement('div'); h.className = 'st-hole none';
+    var d = document.createElement('div'); d.className = 'st-card';
+    d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'st-h');
+    document.body.appendChild(c); document.body.appendChild(h); document.body.appendChild(d);
+    els = { c: c, h: h, d: d };
+    d.addEventListener('click', onClick);
+    document.addEventListener('keydown', onKey, true);
+    window.addEventListener('resize', place);
+    window.addEventListener('scroll', place, true);
+    steps = (C.steps || []).concat([{ end: true }]);
+    show();
+  }
+  function show() {
+    var st = steps[idx];
+    if (st.before) { try { st.before(); } catch (e) {} }
+    setTimeout(function () {
+      if (!open) return;
+      if (!st.end && st.sel && !find(st)) { // skip steps whose part isn't on screen
+        if (st._dir === -1 && idx > 0) { idx--; } else if (idx < steps.length - 1) { idx++; }
+        return show();
+      }
+      paint(st);
+    }, st.before ? 260 : 0);
+  }
+  function paint(st) {
+    var w = W[lang()], last = idx === steps.length - 1, e = st.end ? endCard() : null;
+    var head = e ? e.h : tx(st.h), body = e ? e.p : tx(st.p);
+    var count = steps.length, dots = '';
+    for (var i = 0; i < count; i++) dots += '<i class="' + (i === idx ? 'on' : '') + '"></i>';
+    var b = idx > 0 ? '<button type="button" class="st-btn st-ghost" data-st="back">' + w.back + '</button>' : '';
+    if (e && e.k === 'prompt') b += '<button type="button" class="st-btn st-ghost" data-st="install">' + w.install + '</button>';
+    if (e && e.k === 'inst' && C.share) b += '<button type="button" class="st-btn st-ghost" data-st="share">' + w.share + '</button>';
+    b += '<button type="button" class="st-btn st-next" data-st="' + (last ? 'done' : 'next') + '">' + (last ? w.done : w.next) + '</button>';
+    var d = els.d;
+    d.className = 'st-card' + (C.dark && C.dark() ? ' dark' : '');
+    d.setAttribute('dir', lang() === 'ar' ? 'rtl' : 'ltr'); d.setAttribute('lang', lang());
+    d.innerHTML = '<button type="button" class="st-x" data-st="close" aria-label="' + w.close + '">✕</button>' +
+      '<h2 id="st-h">' + head + '</h2><p>' + body + '</p><div class="st-foot"><div class="st-dots" aria-hidden="true">' + dots + '</div>' + b + '</div>';
+    var el = find(st);
+    if (el) { el.scrollIntoView({ block: 'center', behavior: reduced() ? 'auto' : 'smooth' }); clearTimeout(placeT); placeT = setTimeout(place, reduced() ? 30 : 420); }
+    place();
+    var nb = d.querySelector('.st-next'); if (nb) try { nb.focus({ preventScroll: true }); } catch (x) { nb.focus(); }
+  }
+  function place() {
+    if (!open) return;
+    var st = steps[idx], el = st && !st.end ? find(st) : null, h = els.h, d = els.d;
+    var vw = window.innerWidth, vh = window.innerHeight, cw = d.offsetWidth, ch = d.offsetHeight;
+    if (!el) { h.classList.add('none'); d.style.left = Math.round((vw - cw) / 2) + 'px'; d.style.top = Math.round(Math.max(16, (vh - ch) / 2)) + 'px'; return; }
+    var r = el.getBoundingClientRect(), pad = 6, top = Math.max(6, r.top - pad), bot = Math.min(vh - 6, r.bottom + pad);
+    h.classList.remove('none'); h.style.borderRadius = (C.radius || 20) + 'px';
+    h.style.left = (r.left - pad) + 'px'; h.style.top = top + 'px'; h.style.width = (r.width + 2 * pad) + 'px'; h.style.height = Math.max(0, bot - top) + 'px';
+    var y = vh - bot >= ch + 14 ? bot + 12 : top >= ch + 14 ? top - ch - 12 : vh - ch - 16;
+    d.style.left = Math.round(Math.min(Math.max(16, r.left + r.width / 2 - cw / 2), vw - cw - 16)) + 'px';
+    d.style.top = Math.round(Math.max(16, y)) + 'px';
+  }
+  function onClick(ev) {
+    var t = ev.target.closest ? ev.target.closest('[data-st]') : null; if (!t) return;
+    var a = t.getAttribute('data-st');
+    if (a === 'next') { idx = Math.min(idx + 1, steps.length - 1); steps[idx]._dir = 1; show(); }
+    else if (a === 'back') { idx = Math.max(0, idx - 1); steps[idx]._dir = -1; show(); }
+    else if (a === 'install') { var p = bip; close(); if (p) { p.prompt(); bip = null; } }
+    else if (a === 'share') { close(); if (C.share) C.share(); }
+    else close();
+  }
+  function onKey(e) {
+    if (!open) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); return; }
+    if (e.key === 'Tab') {
+      var f = Array.prototype.slice.call(els.d.querySelectorAll('button')); if (!f.length) return;
+      var i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && (i === f.length - 1 || i < 0)) { e.preventDefault(); f[0].focus(); }
+    }
+  }
+  function close() {
+    if (!open) return;
+    open = false;
+    try { localStorage.setItem(C.key, '1'); } catch (e) {}
+    document.removeEventListener('keydown', onKey, true);
+    window.removeEventListener('resize', place);
+    window.removeEventListener('scroll', place, true);
+    els.c.remove(); els.h.remove(); els.d.remove(); els = null;
+    if (C.onClose) try { C.onClose(); } catch (e) {}
+    if (lastFocus && lastFocus.focus && document.contains(lastFocus)) try { lastFocus.focus({ preventScroll: true }); } catch (e) {}
+  }
+  function seen() { try { return !!localStorage.getItem(C.key); } catch (e) { return true; } }
+  function label() { return W[lang()].tour; }
+  function init(cfg) {
+    C = cfg;
+    if (C.mount) try { C.mount(); } catch (e) {}
+    if (seen()) return;
+    var tries = 0;
+    (function wait() {
+      if (open || seen()) return;
+      var ok = true; try { ok = !C.ready || C.ready(); } catch (e) { ok = false; }
+      if (ok) setTimeout(function () { if (!open && !seen()) start(); }, 700);
+      else if (++tries < 900) setTimeout(wait, 1000);
+    })();
+  }
+  window.SabilTour = { init: init, start: start, close: close, label: label, isOpen: function () { return open; } };
+})();
+</script>
+<script>
+(function () {
+  var en = !/^ar\b/i.test(navigator.language || '');
+  SabilTour.init({
+    key: 'waratha_tour', appName: { ar: 'ورثة', en: 'Waratha' },
+    lang: function () { return en ? 'en' : 'ar'; },
+    ready: function () { var h = document.getElementById('s-home'); return !!h && h.classList.contains('active'); },
+    steps: [
+      { h: { ar: 'أهلًا بك في ورثة', en: 'Welcome to Waratha' }, p: { ar: 'مسابقة في العلم الشرعي: القرآن والحديث والسيرة والفقه والأنبياء والحج، بستة مستويات من البراعم إلى المتقدمين.', en: 'An Islamic knowledge quiz — Quran, Hadith, Seerah, Fiqh, the Prophets and Hajj — in six levels, from young learners to advanced.' } },
+      { sel: '.stats-strip', h: { ar: 'إنجازك', en: 'Your progress' }, p: { ar: 'أيامك المتتالية في التحدي اليومي، ونقاط العلم، وأفضل نتيجة لك.', en: 'Your daily-challenge streak, your knowledge points (XP) and your best score.' } },
+      { sel: '.mode-grid', h: { ar: 'طرق اللعب', en: 'Ways to play' }, p: { ar: 'التحدي اليومي: خمسة أسئلة جديدة كل يوم. الاختبار السريع: عشرة أسئلة تختار مستواها وبابها. اللغز: تلميح أولًا ثم الجواب. المسابقة: أربعون سؤالًا بثلاث محاولات.', en: 'Daily: five fresh questions each day. Quick: ten questions at the level and topic you choose. Riddle: the clue comes first. Marathon: forty questions with three lives.' } },
+      { sel: '#s-home .note-box', h: { ar: 'بعد كل إجابة', en: 'After each answer' }, p: { ar: 'يظهر الشرح والمرجع، لتتعلم من الصواب والخطأ. والأسئلة في مراجعة علمية مستمرة.', en: 'The explanation and its reference appear, so you learn from right and wrong answers. The questions are under ongoing scholarly review.' } }
+    ]
+  });
+})();
+</script>
+<!-- sabil-tour:end -->
 </body>
 </html>
