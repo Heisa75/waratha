@@ -40,6 +40,7 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
     <section id="s-home" class="screen active" aria-labelledby="home-title">
       <header class="hero">
         <button type="button" id="tourBtn" onclick="SabilTour.start()" aria-label="جولة في التطبيق · App tour" style="position:absolute;top:12px;inset-inline-end:12px;z-index:2;width:40px;height:40px;border-radius:99px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:inherit;font:inherit;font-size:18px;font-weight:700;cursor:pointer">؟</button>
+        <a id="sabilBtn" href="https://sabil-app.netlify.app/" aria-label="العودة إلى سبيل · Back to Sabil" title="سبيل · Sabil" style="position:absolute;top:12px;inset-inline-start:12px;z-index:2;width:40px;height:40px;border-radius:99px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:inherit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></a>
         <div class="brand-mark">و</div>
         <p class="eyebrow">Sabil Islamic Hub</p>
         <h1 id="home-title">ورثة</h1>
@@ -81,7 +82,7 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
 
       <section class="note-box">
         <strong>ملاحظة المحتوى</strong>
-        <p>414 سؤالاً عبر ٦ مستويات وست أبواب. ٢٦ سؤالاً محدَّثاً بمستوى متعدد الأبعاد من مخططات المحتوى. المواد تحتاج مراجعة علمية قبل النشر الرسمي.</p>
+        <p id="content-note">414 سؤالاً عبر ٦ مستويات وست أبواب. المواد تحتاج مراجعة علمية قبل النشر الرسمي.</p>
       </section>
     </section>
 
@@ -112,6 +113,7 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
         <div class="badges">
           <span id="qz-cat"></span>
           <span id="qz-level"></span>
+          <span id="qz-reviewed" hidden title="راجعه مختص · Reviewed by a specialist">✓ مُراجَع · Reviewed</span>
           <span id="qz-lives"></span>
         </div>
         <p id="qz-num" class="qnum"></p>
@@ -348,6 +350,14 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
     el.textContent=ST.mode==='marathon' ? '❤️'.repeat(ST.lives||0)+'🖤'.repeat(Math.max(0,3-(ST.lives||0))) : '';
     el.hidden=ST.mode!=='marathon';
   }
+
+  // Home content note: real counts, so it stays right as questions are reviewed.
+  function renderContentNote(){
+    const el=$('content-note'); if(!el) return;
+    const total=QUESTIONS.length, done=QUESTIONS.filter(q=>q.reviewStatus==='blueprint_human_reviewed').length;
+    el.textContent=`${arNum(total)} سؤالًا عبر ٦ مستويات و٦ أبواب. ${arNum(done)} منها راجعها مختص وعليها علامة ✓ مُراجَع، والباقي مسودة تنتظر المراجعة العلمية.`;
+  }
+
   function renderQuestion(){
     clearTimer();
     const q=ST.questions[ST.currentQ];
@@ -359,6 +369,7 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
     renderDots();
     $('qz-cat').textContent=`${cat.icon} ${cat.ar} · ${cat.en}`;
     $('qz-level').textContent=`${lv.ar} · ${lv.en}`;
+    $('qz-reviewed').hidden=q.reviewStatus!=='blueprint_human_reviewed';
     renderLives();
     $('qz-num').textContent=`${ST.currentQ+1} of ${ST.questions.length} · ${arNum(ST.currentQ+1)} / ${arNum(ST.questions.length)}`;
 
@@ -499,7 +510,7 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
   }
 
   function init(){
-    renderLevels(); initHome();
+    renderLevels(); initHome(); renderContentNote();
     document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>selectMode(b.dataset.mode)));
     document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.nav)));
     $('play-again').addEventListener('click',replay);
