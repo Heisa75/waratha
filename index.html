@@ -32,6 +32,11 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
 @media (min-width:430px){.mode-grid{grid-template-columns:1fr 1fr}.mode-card{min-height:122px;align-content:center}.mode-card em{grid-column:1/-1}.mode-card b{grid-column:1/-1}.level-grid,.category-grid{gap:12px}}
 
 
+.disclaimer{margin-top:9px;padding-top:9px;border-top:1px solid rgba(201,168,76,.3);font-size:.78rem}
+.disclaimer-en{direction:ltr;text-align:right;font-size:.72rem;opacity:.85;margin-top:4px}
+.report-link{display:inline-block;margin-top:10px;background:var(--white);border:1px solid var(--bdr);color:var(--g);border-radius:99px;padding:7px 13px;font-size:.74rem;text-decoration:none;font-weight:700}
+.report-link:hover{border-color:var(--g2);background:var(--cr2)}
+.explain .report-link{margin-top:11px;font-size:.7rem;padding:6px 11px}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -83,6 +88,9 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
       <section class="note-box">
         <strong>ملاحظة المحتوى</strong>
         <p id="content-note">414 سؤالاً عبر ٦ مستويات وست أبواب. المواد تحتاج مراجعة علمية قبل النشر الرسمي.</p>
+        <p class="disclaimer">لا تؤاخذونا على سهو أو خطأ غير مقصود. هذا التطبيق للتعليم والتذكير، ولا يُستفتى به؛ وللأحكام يُرجع إلى أهل العلم.</p>
+        <p class="disclaimer-en" dir="ltr">Please forgive any unintended slip or error. This app is for learning and reminder, not for religious rulings — for those, ask a qualified scholar.</p>
+        <a class="report-link" href="mailto:myapps2026@hotmail.com?subject=%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%A9%20%D8%A3%D9%88%20%D8%AE%D8%B7%D8%A3%20%D9%81%D9%8A%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D9%88%D8%B1%D8%AB%D8%A9">✉️ أبلغنا عن خطأ أو اقتراح · Report an issue</a>
       </section>
     </section>
 
@@ -126,6 +134,7 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
           <strong id="qz-exp-ar"></strong>
           <p id="qz-exp-en" dir="ltr"></p>
           <small id="qz-ref" dir="ltr"></small>
+          <a id="qz-report" class="report-link" href="#" hidden>✉️ أبلغنا عن خطأ في هذا السؤال · Report this question</a>
         </section>
         <button id="qz-next" class="primary" hidden>التالي · Next</button>
       </article>
@@ -454,6 +463,14 @@ body.kids .quiz-card h2{font-size:1.45rem}body.kids .option{padding:16px}body.ki
     $('qz-exp-ar').textContent=q.expAr || '';
     $('qz-exp-en').textContent=q.expEn || '';
     $('qz-ref').textContent=q.ref ? `📚 ${q.ref}` : '';
+    // A report should tell us which question it is about, so the id and the text go with it.
+    const rep=$('qz-report');
+    if(rep){
+      const subject=`خطأ أو ملاحظة في سؤال ورثة (${q.id})`;
+      const body=[`رقم السؤال / Question id: ${q.id}`,`السؤال: ${q.ar||''}`,`الجواب المعتمد: ${(q.opts&&q.opts[q.ans]&&q.opts[q.ans].ar)||''}`,'','ما الملاحظة؟ / What is wrong or what would you suggest?',''].join('\n');
+      rep.href=`mailto:myapps2026@hotmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      rep.hidden=false;
+    }
     const last = ST.currentQ >= ST.questions.length-1 || forceEnd;
     const next=$('qz-next'); next.hidden=false; next.textContent=last ? 'النتائج · Results ←' : 'التالي · Next ←';
     next.onclick = last ? showResult : nextQuestion;
